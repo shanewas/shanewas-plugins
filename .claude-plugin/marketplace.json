@@ -1,0 +1,24 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "shanewas-plugins",
+  "description": "Universal multi-agent plugin & skill marketplace by Shanewas Ahmed — supporting Claude Code, Antigravity, OpenCode, Hermes, and Muse.",
+  "owner": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com",
+    "url": "https://github.com/shanewas"
+  },
+  "plugins": [
+    {
+      "name": "core-tools",
+      "description": "Universal core developer tools, audit agent, and repository summary skills.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/core-tools",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
+    }
+  ]
+}

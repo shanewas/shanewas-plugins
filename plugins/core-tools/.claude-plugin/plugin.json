@@ -1,0 +1,12 @@
+{
+  "name": "core-tools",
+  "description": "Universal developer utilities, git summary skills, and repo audit agent.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com"
+  },
+  "skills": "./skills",
+  "commands": "./commands",
+  "agents": "./agents"
+}

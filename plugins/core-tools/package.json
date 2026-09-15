@@ -1,0 +1,11 @@
+{
+  "name": "@shanewas/plugin-core-tools",
+  "version": "1.0.0",
+  "description": "Universal developer utilities for OpenCode, Claude Code, and Antigravity",
+  "author": "Shanewas Ahmed <shanewasahmed@gmail.com>",
+  "license": "MIT",
+  "main": "plugin.js",
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.17.8"
+  }
+}

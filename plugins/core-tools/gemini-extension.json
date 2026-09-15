@@ -1,0 +1,6 @@
+{
+  "name": "core-tools",
+  "description": "Universal developer utilities, git summary skills, and repo audit agent for Antigravity.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}
