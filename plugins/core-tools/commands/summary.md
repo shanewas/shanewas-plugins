@@ -1,6 +1,6 @@
 ---
 description: Quick git repository health check and worktree status
-argument-hint: [branch] (optional)
+argument-hint: "[branch] (optional)"
 context: fork
 ---
 

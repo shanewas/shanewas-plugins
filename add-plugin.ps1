@@ -24,7 +24,7 @@ New-Item -ItemType Directory -Path (Join-Path $PluginDir "skills\$Name") -Force 
 New-Item -ItemType Directory -Path (Join-Path $PluginDir "commands") -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $PluginDir "agents") -Force | Out-Null
 
-# 2. Claude Code plugin.json
+# 2. Claude Code plugin.json (canonical schema)
 $ClaudePlugin = @{
     name = $Name
     description = $Description
@@ -33,9 +33,6 @@ $ClaudePlugin = @{
         name = "Shanewas Ahmed"
         email = "shanewasahmed@gmail.com"
     }
-    skills = "./skills"
-    commands = "./commands"
-    agents = "./agents"
 } | ConvertTo-Json -Depth 5
 Set-Content -Path (Join-Path $PluginDir ".claude-plugin\plugin.json") -Value $ClaudePlugin
 

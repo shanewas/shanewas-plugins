@@ -5,8 +5,5 @@
   "author": {
     "name": "Shanewas Ahmed",
     "email": "shanewasahmed@gmail.com"
-  },
-  "skills": "./skills",
-  "commands": "./commands",
-  "agents": "./agents"
+  }
 }
