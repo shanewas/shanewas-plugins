@@ -15,6 +15,17 @@ jobs:
         with:
           python-version: "3.9"
 
+      - name: Syntax gate (py + js)
+        run: |
+          python3 -m py_compile plugins/*/tools/*.py tests/*.py
+          if command -v node >/dev/null 2>&1; then
+            for f in plugins/*/plugin.js; do
+              node --check "$f"
+            done
+          else
+            echo "node not installed; skipping node --check"
+          fi
+
       - name: Lint + fixture tests
         run: python3 tests/run.py
 
