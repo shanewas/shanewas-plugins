@@ -67,6 +67,8 @@ Each package folder contains:
 - `skills/` with portable `SKILL.md` documents
 - `commands/` and `agents/` for Claude slash commands and subagents
 
+The `tools/*.py` CLIs are stdlib-only; the node shims (`plugin.js`) require node, `python3`, and the `package.json` dependencies.
+
 ## Repository Layout
 
 - `.claude-plugin/marketplace.json`: Root catalog listing available packages

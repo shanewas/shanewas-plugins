@@ -54,3 +54,9 @@ Each hit adds fixed points: stock phrases 10, humanizer tells and
 meta-commentary 8, filler and jargon 5, hedging 4. Rhythm checks add up
 to 30 on prose with four or more sentences. Short notes and code files
 skip them. Scores cap at 100.
+
+## Requirements
+
+- `tools/slop.py` is stdlib-only (Python 3.9+, no third-party packages).
+- The OpenCode shim (`plugin.js`) needs node plus the `@opencode-ai/plugin`
+  dependency from `package.json`, and shells out to `python3`.

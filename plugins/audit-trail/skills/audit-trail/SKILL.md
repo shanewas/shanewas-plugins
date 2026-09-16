@@ -47,3 +47,9 @@ accepts the Claude PostToolUse envelope plus flat variants carrying
 `digest` groups edits by file in first-seen order, with added/removed
 line counts, edit counts, and turn refs. Corrupt lines are skipped
 with a stderr note rather than failing the review.
+
+## Requirements
+
+- `tools/ledger.py` is stdlib-only (Python 3.9+, no third-party packages).
+- The OpenCode shim (`plugin.js`) needs node plus the `@opencode-ai/plugin`
+  dependency from `package.json`, and shells out to `python3`.

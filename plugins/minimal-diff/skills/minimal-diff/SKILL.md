@@ -43,3 +43,9 @@ empty output.
   your session's post-edit step. Tool-event names stay out until a local
   config confirms them.
 - Muse: no native hook ships yet; see `docs/muse-hooks-TBD.md`. The CLI works as-is.
+
+## Requirements
+
+- `tools/diffgate.py` is stdlib-only (Python 3.9+, no third-party packages).
+- The OpenCode shim (`plugin.js`) needs node plus the `@opencode-ai/plugin`
+  dependency from `package.json`, and shells out to `python3`.
