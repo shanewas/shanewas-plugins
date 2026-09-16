@@ -197,3 +197,27 @@ SKILL.md
 ```
 
 Result: TBD (no hermes binary in this environment)
+
+## Round 2 (2026-09-16) — OpenCode binary spike
+
+Installed opencode 1.18.31 user-local (`~/.opencode/bin`, no sudo).
+Project config IS read (`loading path=/tmp/ocspike/opencode.json` in
+`--print-logs --log-level DEBUG`), but file-path `plugin` entries
+produce zero observable load signal:
+
+- Positive: `plugin: ["/tmp/shanewas-exec/plugins/core-tools/plugin.js"]`
+  → `opencode run` clean, exit 0, no plugin mentions in DEBUG logs.
+- Negative: nonexistent path → identical clean run (proves nothing).
+- Throwing control (`throw new Error("PROBE-BOOM")`): silent in
+  project config, in `file://` URL form, AND in global
+  `~/.config/opencode/opencode.jsonc` (backed up, patched, ran,
+  restored byte-identical — `cmp` clean).
+
+`opencode plugin <module>` only accepts npm module names (no node/npm
+here). Conclusion: the documented "reference `plugin.js` in
+`opencode.json`" path is UNVERIFIABLE on opencode 1.18.31 — file
+entries are silently ignored. Likely needs an npm-packaged plugin via
+the `opencode plugin` flow. Row stays TBD.
+
+Hermes / Antigravity round 2: still no binaries and no public CLI
+install path found — rows stay TBD.
