@@ -1,5 +1,5 @@
 {
-  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your commit-gate checkout.",
+  "_note": "Merge this entry into your project's .agents/hooks.json, replacing /path/to/commit-gate with your checkout. One-liner (run from the plugin dir): sed \"s#/path/to/commit-gate#$(pwd)#g\" hooks/antigravity-hooks.json > /tmp/commit-gate-hooks.json, then merge /tmp/commit-gate-hooks.json.",
   "commit-gate": {
     "SessionStart": null,
     "PreInvocation": null,

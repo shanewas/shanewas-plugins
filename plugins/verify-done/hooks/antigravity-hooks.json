@@ -1,5 +1,5 @@
 {
-  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your verify-done checkout.",
+  "_note": "Merge this entry into your project's .agents/hooks.json, replacing /path/to/verify-done with your checkout. One-liner (run from the plugin dir): sed \"s#/path/to/verify-done#$(pwd)#g\" hooks/antigravity-hooks.json > /tmp/verify-done-hooks.json, then merge /tmp/verify-done-hooks.json.",
   "verify-done": {
     "SessionStart": null,
     "PreInvocation": null,

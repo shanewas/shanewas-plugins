@@ -1,5 +1,5 @@
 {
-  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your review-pair checkout.",
+  "_note": "Merge this entry into your project's .agents/hooks.json, replacing /path/to/review-pair with your checkout. One-liner (run from the plugin dir): sed \"s#/path/to/review-pair#$(pwd)#g\" hooks/antigravity-hooks.json > /tmp/review-pair-hooks.json, then merge /tmp/review-pair-hooks.json.",
   "review-pair": {
     "SessionStart": null,
     "PreInvocation": null,

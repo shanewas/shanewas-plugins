@@ -1,5 +1,5 @@
 {
-  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your minimal-diff checkout.",
+  "_note": "Merge this entry into your project's .agents/hooks.json, replacing /path/to/minimal-diff with your checkout. One-liner (run from the plugin dir): sed \"s#/path/to/minimal-diff#$(pwd)#g\" hooks/antigravity-hooks.json > /tmp/minimal-diff-hooks.json, then merge /tmp/minimal-diff-hooks.json.",
   "minimal-diff": {
     "SessionStart": null,
     "PreInvocation": null,

@@ -1,5 +1,5 @@
 {
-  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your slop-gate checkout.",
+  "_note": "Merge this entry into your project's .agents/hooks.json, replacing /path/to/slop-gate with your checkout. One-liner (run from the plugin dir): sed \"s#/path/to/slop-gate#$(pwd)#g\" hooks/antigravity-hooks.json > /tmp/slop-gate-hooks.json, then merge /tmp/slop-gate-hooks.json.",
   "slop-gate": {
     "SessionStart": null,
     "PreInvocation": null,

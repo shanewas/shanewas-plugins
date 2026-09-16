@@ -1,5 +1,5 @@
 {
-  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your audit-trail checkout.",
+  "_note": "Merge this entry into your project's .agents/hooks.json, replacing /path/to/audit-trail with your checkout. One-liner (run from the plugin dir): sed \"s#/path/to/audit-trail#$(pwd)#g\" hooks/antigravity-hooks.json > /tmp/audit-trail-hooks.json, then merge /tmp/audit-trail-hooks.json.",
   "audit-trail": {
     "SessionStart": null,
     "PreInvocation": null,
