@@ -81,3 +81,12 @@ def test_sloppy_fixture_trips_gate():
     report = _score_json("sloppy.md")
     assert report["score"] >= 40, "sloppy.md scored %d, want >=40" % (
         report["score"],)
+
+
+def test_long_clean_stays_clean():
+    words = len((FIXTURES / "long-clean.md").read_text().split())
+    assert words >= 800, "long-clean.md has %d words, want 800+" % words
+    report = _score_json("long-clean.md")
+    assert report["score"] < 20, "long-clean.md scored %d, want <20" % (
+        report["score"],)
+    assert report["band"] == "clean", "long-clean.md band %r" % report["band"]

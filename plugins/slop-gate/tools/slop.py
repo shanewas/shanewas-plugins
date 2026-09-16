@@ -9,8 +9,10 @@ small CLI with three subcommands:
     tools/slop.py learn SAMPLE... [--profile PATH]
 
 Score bands: <20 clean, 20-40 marginal, 40-60 heavy, >60 severe.
-Scoring is flat additive per hit (no length normalization), so a small
-edit carrying strong slop signals still trips the gate. `check` prints a
+Scoring is flat additive per hit up to 500 words, so a small
+edit carrying strong slop signals still trips the gate; above 500 words
+the phrase-hit subtotal scales as if the text were 500 words long.
+Rhythm deviations are per-word normalized throughout. `check` prints a
 warning and exits 0 by default; with SLOP_GATE_MODE=block it exits 2 when
 the score reaches the threshold. With no FILE, `check` reads a hook event
 (JSON on stdin) and scores the edited file named there.
@@ -58,6 +60,11 @@ WEIGHTS = {
 RHYTHM_PER_DEVIATION = 6
 RHYTHM_CAP = 30
 DEFAULT_THRESHOLD = 20
+
+# Phrase hits are raw counts, so long documents accumulate noise past the
+# bands. Above this many words the phrase subtotal scales as if the text
+# were this long; shorter texts score exactly as before.
+LENGTH_NORM_WORDS = 500
 
 # High-risk phrases that nearly always indicate AI slop.
 HIGH_RISK_PHRASES = [
@@ -584,12 +591,18 @@ class SlopGate:
             })
 
     def _calculate_score(self) -> int:
-        """Flat additive score, capped at 100. No length normalization: the
-        gate scores the edit in front of it, so exact thresholds stay pinnable."""
-        score = 0
+        """Flat additive score, capped at 100. Phrase hits are raw counts,
+        so above LENGTH_NORM_WORDS words the phrase subtotal scales as if
+        the text were LENGTH_NORM_WORDS long; shorter texts score exactly
+        as before, and rhythm deviations are per-word normalized throughout."""
+        phrase = 0
         for category, weight in WEIGHTS.items():
-            score += len(self.findings[category]) * weight
+            phrase += len(self.findings[category]) * weight
+        words = max(len(self.text.split()), 1)
+        if words > LENGTH_NORM_WORDS:
+            phrase = int(phrase * LENGTH_NORM_WORDS / words)
 
+        score = phrase
         per_deviation = RHYTHM_PER_DEVIATION // 2 if self.low_confidence \
             else RHYTHM_PER_DEVIATION
         score += min(len(self.deviations) * per_deviation, RHYTHM_CAP)

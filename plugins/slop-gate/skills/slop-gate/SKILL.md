@@ -51,7 +51,9 @@ Point `--profile` at the file when it lives elsewhere. Pass
 ## Scoring notes
 
 Each hit adds fixed points: stock phrases 10, humanizer tells and
-meta-commentary 8, filler and jargon 5, hedging 4. Rhythm checks add up
+meta-commentary 8, filler and jargon 5, hedging 4. Above 500 words the
+phrase-hit subtotal scales as if the text were 500 words long, so long
+clean documents don't trip on scattered noise. Rhythm checks add up
 to 30 on prose with four or more sentences. Short notes and code files
 skip them. Scores cap at 100.
 
