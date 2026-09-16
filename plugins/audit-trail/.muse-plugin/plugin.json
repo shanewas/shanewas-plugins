@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "audit-trail",
   "displayName": "Audit Trail",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zero-dependency edit ledger and review digest: log hook events to JSONL, render per-file digests.",
   "compat": {
     "source": "native",
@@ -25,7 +25,11 @@
       {
         "id": "ledger-append",
         "event": "PostToolUse",
-        "command": ["python3", "tools/ledger.py", "append"]
+        "command": [
+          "python3",
+          "tools/ledger.py",
+          "append"
+        ]
       }
     ],
     "mcpServers": [],

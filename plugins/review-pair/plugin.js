@@ -49,7 +49,7 @@ export const plugin = async (ctx) => {
   return {
     name: "review-pair",
     description: "Zero-dependency review-findings shape gate for OpenCode",
-    version: "1.0.0",
+    version: "1.1.0",
     checkReview,
   };
 };

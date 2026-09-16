@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "commit-gate",
   "displayName": "Commit Gate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zero-dependency commit-message and staged-file gate: warn or block on bad shape, AI trailers, and banned extensions.",
   "compat": {
     "source": "native",

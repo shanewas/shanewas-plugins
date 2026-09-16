@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "slop-gate",
   "displayName": "Slop Gate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zero-dependency AI-slop scorer and edit gate: warn or block on sloppy prose.",
   "compat": {
     "source": "native",

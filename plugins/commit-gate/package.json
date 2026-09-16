@@ -1,6 +1,6 @@
 {
   "name": "@shanewas/plugin-commit-gate",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zero-dependency commit-message and staged-file gate for OpenCode, Claude Code, and Antigravity",
   "author": "Shanewas Ahmed <shanewasahmed@gmail.com>",
   "license": "MIT",

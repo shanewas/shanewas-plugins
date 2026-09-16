@@ -41,7 +41,7 @@ export const plugin = async (ctx) => {
   return {
     name: "verify-done",
     description: "Zero-dependency done-claim evidence gate for OpenCode",
-    version: "1.0.0",
+    version: "1.1.0",
     checkDone,
   };
 };

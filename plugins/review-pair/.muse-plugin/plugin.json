@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "name": "review-pair",
   "displayName": "Review Pair",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Zero-dependency review-findings shape gate: warn or block when review lines are not machine-readable.",
   "compat": {
     "source": "native",

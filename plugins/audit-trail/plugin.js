@@ -25,7 +25,7 @@ export const plugin = async (ctx) => {
   return {
     name: "audit-trail",
     description: "Zero-dependency edit ledger and review digest for OpenCode",
-    version: "1.0.0",
+    version: "1.1.0",
     appendAudit,
   };
 };

@@ -6,6 +6,38 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [1.1.0] - 2026-09-16
+
+### Added
+
+- Native Muse hook wiring (`.muse-plugin/plugin.json`) for all six
+  gates, replacing the `muse-hooks-TBD.md` notes.
+- `--hook` flag on all five gate CLIs: strict hook-runtime JSON
+  (`systemMessage`, or `decision:block` plus `reason`), always exit 0.
+- `add-plugin.sh` bash scaffolder alongside `add-plugin.ps1`, with
+  fixture tests.
+- CI syntax gate (`py_compile` plus `node --check`) and `bash -n`
+  coverage for the new script.
+- Harness verification evidence (`docs/harness-evidence.md`): Claude
+  Code and Muse Code install paths verified hands-on; OpenCode,
+  Antigravity, and Hermes remain TBD with documented spike notes.
+- Archived implementation plans (`plans/001-009`) for this release.
+
+### Fixed
+
+- Slop-gate length bias: phrase subtotal scales above 500 words, so
+  long clean documents no longer trip the gate on scattered noise.
+- Diff-gate concern proxy counts `max(dirs, extensions)` instead of
+  their sum, ending false trips on focused multi-type changes.
+- Antigravity hook snippets ship a copy-paste `sed` one-liner instead
+  of a bare `/path/to` placeholder.
+
+### Changed
+
+- README repository layout lists all seven plugins; the
+  "zero-dependency" claim is scoped to `tools/*.py` with explicit
+  shim requirements.
+
 ## [1.0.0] - 2026-09-15
 
 ### Added
@@ -45,5 +77,6 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 - Bump rule: patch for skill/command doc fixes, minor for new
   skills/plugins/harnesses, major for manifest schema or layout breaks.
 
-[Unreleased]: https://github.com/shanewas/shanewas-plugins/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/shanewas/shanewas-plugins/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/shanewas/shanewas-plugins/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/shanewas/shanewas-plugins/releases/tag/v1.0.0

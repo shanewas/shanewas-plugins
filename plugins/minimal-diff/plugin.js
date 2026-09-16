@@ -34,7 +34,7 @@ export const plugin = async (ctx) => {
   return {
     name: "minimal-diff",
     description: "Zero-dependency diff-size gate for OpenCode",
-    version: "1.0.0",
+    version: "1.1.0",
     checkDiff,
   };
 };

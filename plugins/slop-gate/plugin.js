@@ -29,7 +29,7 @@ export const plugin = async (ctx) => {
   return {
     name: "slop-gate",
     description: "Zero-dependency AI-slop scorer and edit gate for OpenCode",
-    version: "1.0.0",
+    version: "1.1.0",
     checkSlop,
   };
 };

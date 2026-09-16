@@ -51,7 +51,7 @@ export const plugin = async (ctx) => {
   return {
     name: "commit-gate",
     description: "Zero-dependency commit-message and staged-file gate for OpenCode",
-    version: "1.0.0",
+    version: "1.1.0",
     checkCommit,
   };
 };
