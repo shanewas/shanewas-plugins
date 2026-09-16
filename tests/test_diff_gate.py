@@ -73,11 +73,20 @@ def test_check_many_lines_warns():
 
 
 def test_check_concerns_warns():
-    proc = _run_check(str(FIXTURES / "concerns.diff"))
+    # max(dirs, exts) scores concerns.diff 3 (silent), so the trip-case moved here.
+    proc = _run_check(str(FIXTURES / "many-concerns.diff"))
     assert proc.returncode == 0, "concerns check exited %d" % proc.returncode
     assert "Diff gate" in proc.stdout, (
         "concerns check printed no warning: %r" % (proc.stdout[:200],))
-    assert "concerns=6" in proc.stdout, "warning lacks concern count: %r" % (
+    assert "concerns=4" in proc.stdout, "warning lacks concern count: %r" % (
+        proc.stdout[:200],)
+
+
+def test_single_idea_mixed_types_passes():
+    # max(dirs, exts) scores 2 dirs + 2 exts as 2, not 4: no trip.
+    proc = _run_check(str(FIXTURES / "mixed-single-idea.diff"))
+    assert proc.returncode == 0, "mixed check exited %d" % proc.returncode
+    assert proc.stdout == "", "single-idea mixed-type diff must stay silent, got %r" % (
         proc.stdout[:200],)
 
 
@@ -143,5 +152,6 @@ def test_check_env_overrides_honored():
         "7 files must pass DIFF_GATE_MAX_FILES=10, got %r" % proc.stdout[:200])
     env["DIFF_GATE_MAX_CONCERNS"] = "1"
     proc = _run_check(str(FIXTURES / "small.diff"), env=env)
+    # max(dirs, exts) scores small.diff 2 (was 3); still trips a max of 1.
     assert "Diff gate" in proc.stdout, (
-        "concerns 3 must trip DIFF_GATE_MAX_CONCERNS=1")
+        "concerns 2 must trip DIFF_GATE_MAX_CONCERNS=1")

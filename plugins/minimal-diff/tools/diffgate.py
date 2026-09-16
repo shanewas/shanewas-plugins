@@ -9,9 +9,9 @@ review in one pass:
 
 With no DIFF, `check` reads the diff from stdin, so it slots behind
 `git diff` in hooks and scripts. It reports files touched, lines
-added/removed, and a concern heuristic (distinct top-level dirs plus
-distinct file extensions) as a rough proxy for how many ideas the
-change spans.
+added/removed, and a concern heuristic (the larger of distinct
+top-level dirs and distinct file extensions) as a rough proxy for
+how many ideas the change spans.
 
 Warns and exits 0 when files > 5, added+removed > 400, or concerns > 3.
 Thresholds yield to flags first, then DIFF_GATE_MAX_FILES /
@@ -106,7 +106,8 @@ def parse_diff(text):
 
 
 def concerns_of(paths):
-    """Rough concern proxy: distinct top-level dirs plus extensions."""
+    """Rough concern proxy: max(distinct top-level dirs,
+    distinct file extensions)."""
     dirs = set()
     exts = set()
     for path in paths:
@@ -114,7 +115,7 @@ def concerns_of(paths):
         dirs.add(parts[0] if len(parts) > 1 else "(root)")
         base = parts[-1]
         exts.add(base.rsplit(".", 1)[1].lower() if "." in base else "(none)")
-    return len(dirs) + len(exts)
+    return max(len(dirs), len(exts))
 
 
 def resolve_threshold(flag, env_name, default):

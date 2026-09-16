@@ -6,8 +6,9 @@ description: Use when a change needs a size check before review, when a diff sho
 # Minimal Diff
 
 Gates each change on diff size: files touched, lines added plus
-removed, and a concern proxy (distinct top-level dirs plus distinct
-file extensions). It warns by default and can block when
+removed, and a concern proxy (the larger of distinct top-level
+dirs and distinct file extensions). It warns by default and can
+block when
 `DIFF_GATE_MODE=block` is set. The tool is one Python file with no
 third-party packages, so it runs anywhere Python 3.9 does.
 
@@ -15,7 +16,8 @@ third-party packages, so it runs anywhere Python 3.9 does.
 
 - More than 5 files trips the gate. One review, one handful of files.
 - More than 400 added plus removed lines trips it. Big diffs hide bugs.
-- A concern proxy over 3 trips it. Scattered changes split apart.
+- A concern proxy over 3 trips it: max(distinct top-level dirs,
+  distinct file extensions). Scattered changes split apart.
 
 ## Commands
 
