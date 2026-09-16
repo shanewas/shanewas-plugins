@@ -111,3 +111,5 @@ def test_muse_hooks_envelope():
     assert any("tools/reviewfmt.py" in cmd for cmd in commands), (
         ".muse-plugin/plugin.json must route to tools/reviewfmt.py, got %r"
         % (commands,))
+    assert any("--hook" in cmd for cmd in commands), (
+        ".muse-plugin/plugin.json must pass --hook, got %r" % (commands,))

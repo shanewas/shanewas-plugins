@@ -25,7 +25,12 @@
       {
         "id": "commit-check",
         "event": "PostToolUse",
-        "command": ["python3", "tools/commitcheck.py", "check", "--json"]
+        "command": [
+          "python3",
+          "tools/commitcheck.py",
+          "check",
+          "--hook"
+        ]
       }
     ],
     "mcpServers": [],

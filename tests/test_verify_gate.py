@@ -170,3 +170,33 @@ def test_check_json_fail_open():
     assert report["ok"] is True, "json fail-open must carry ok:true"
     assert report.get("note"), "json fail-open must carry a note"
     assert proc.stderr.strip(), "json fail-open must still note on stderr"
+
+
+HOOK_KEYS = {"systemMessage", "decision", "reason",
+             "hookSpecificOutput", "suppressOutput"}
+
+
+def test_hook_output_strict_keys():
+    proc = _run_check("--claim", str(FIXTURES / "bad-claim.txt"), "--hook")
+    assert proc.returncode == 0, "hook check exited %d" % proc.returncode
+    try:
+        report = json.loads(proc.stdout)
+    except json.JSONDecodeError as exc:
+        raise AssertionError("hook output is not JSON: %s" % exc)
+    assert set(report) <= HOOK_KEYS, "hook keys %r not hook-safe" % (
+        sorted(set(report)),)
+    assert report.get("systemMessage"), "hook output lacks systemMessage"
+    assert "decision" not in report, "warn-mode hook must not block"
+
+
+def test_hook_block_mode_decision():
+    env = _warn_env()
+    env["VERIFY_DONE_MODE"] = "block"
+    proc = _run_check("--claim", str(FIXTURES / "bad-claim.txt"), "--hook",
+                      env=env)
+    assert proc.returncode == 0, "hook block must exit 0, got %d" % (
+        proc.returncode,)
+    report = json.loads(proc.stdout)
+    assert report.get("decision") == "block", "hook block lacks decision"
+    assert report.get("reason"), "hook block lacks reason"
+    assert report.get("systemMessage"), "hook block lacks systemMessage"

@@ -5,7 +5,7 @@ Unifies the anti-slop detector phrase lists and voice metrics into one
 small CLI with three subcommands:
 
     tools/slop.py score FILE [--json] [--verbose]
-    tools/slop.py check [FILE] [--threshold N] [--json]
+    tools/slop.py check [FILE] [--threshold N] [--json] [--hook]
     tools/slop.py learn SAMPLE... [--profile PATH]
 
 Score bands: <20 clean, 20-40 marginal, 40-60 heavy, >60 severe.
@@ -14,7 +14,9 @@ edit carrying strong slop signals still trips the gate; above 500 words
 the phrase-hit subtotal scales as if the text were 500 words long.
 Rhythm deviations are per-word normalized throughout. `check` prints a
 warning and exits 0 by default; with SLOP_GATE_MODE=block it exits 2 when
-the score reaches the threshold. With no FILE, `check` reads a hook event
+the score reaches the threshold. `--hook` emits strict hook-runtime JSON
+(systemMessage, or decision:block plus reason) and always exits 0.
+With no FILE, `check` reads a hook event
 (JSON on stdin) and scores the edited file named there.
 
 Works on Python 3.9+ with no third-party packages.
@@ -700,6 +702,20 @@ def cmd_score(args) -> int:
     return 0
 
 
+def hook_report(text, blocking) -> int:
+    """Strict hook-runtime JSON: only keys hook-output schemas accept
+    (systemMessage plus decision/reason when blocking). Always exits 0:
+    blocking travels in the decision field, never the exit code, because
+    hook runtimes drop the message on nonzero exit."""
+    payload = {"systemMessage": text}
+    if blocking:
+        payload = {"decision": "block",
+                   "reason": text.split("\n")[0][:200],
+                   "systemMessage": text}
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+    return 0
+
+
 def cmd_check(args) -> int:
     target = args.file or hook_file_from_stdin()
     if not target or not Path(target).is_file():
@@ -710,6 +726,10 @@ def cmd_check(args) -> int:
     if results["score"] < args.threshold:
         return 0
     lines = gate.warn_lines(args.threshold)
+    if args.hook:
+        return hook_report(
+            "\n".join(lines),
+            os.environ.get("SLOP_GATE_MODE") == "block")
     if args.json:
         print(json.dumps({
             "systemMessage": "\n".join(lines),
@@ -767,6 +787,9 @@ def build_parser() -> argparse.ArgumentParser:
                     help="trip score (default %d)" % DEFAULT_THRESHOLD)
     ch.add_argument("--json", action="store_true",
                     help="emit a systemMessage envelope for hook runtimes")
+    ch.add_argument("--hook", action="store_true",
+                    help="strict hook-runtime JSON (accepted keys only), "
+                         "always exit 0; blocking uses decision:block")
     ch.add_argument("--profile", type=Path, default=PROFILE_PATH,
                     help="voice profile path")
     ch.add_argument("--no-profile", action="store_true",

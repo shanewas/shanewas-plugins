@@ -5,6 +5,7 @@ Reads review findings text, one finding per line, and validates the
 machine-readable shape:
 
     tools/reviewfmt.py check [FILE] [--json]
+    tools/reviewfmt.py check [FILE] [--hook]
 
 With no FILE, `check` reads findings from stdin, so it slots behind
 any review step that prints findings. Each line must match:
@@ -132,10 +133,24 @@ def read_input(path):
         return None, "%s: %s" % (path, exc)
 
 
+def hook_report(text, blocking):
+    """Strict hook-runtime JSON: only keys hook-output schemas accept
+    (systemMessage plus decision/reason when blocking). Always exits 0:
+    blocking travels in the decision field, never the exit code, because
+    hook runtimes drop the message on nonzero exit."""
+    payload = {"systemMessage": text}
+    if blocking:
+        payload = {"decision": "block",
+                   "reason": text.split("\n")[0][:200],
+                   "systemMessage": text}
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+    return 0
+
+
 def fail_open(args, reason):
     """Missing, unreadable, or empty input: stderr note, exit 0."""
     print("review-pair: %s" % reason, file=sys.stderr)
-    if args.json:
+    if args.json and not args.hook:
         print(json.dumps(report_payload([], [], empty_counts()),
                          indent=2, ensure_ascii=False))
     return 0
@@ -149,6 +164,12 @@ def cmd_check(args) -> int:
         return fail_open(args, "no findings to check (empty input)")
     findings, malformed = parse_findings(text)
     counts = count_by_severity(findings)
+    if args.hook:
+        if not tripped(counts, malformed):
+            return 0
+        return hook_report(
+            "\n".join(verdict_lines(findings, malformed, counts)),
+            os.environ.get("REVIEW_PAIR_MODE") == "block")
     if args.json:
         print(json.dumps(report_payload(findings, malformed, counts),
                          indent=2, ensure_ascii=False))
@@ -174,6 +195,9 @@ def build_parser() -> argparse.ArgumentParser:
                     help="findings file to check; omit to read from stdin")
     ch.add_argument("--json", action="store_true",
                     help="machine-readable findings for an audit ledger")
+    ch.add_argument("--hook", action="store_true",
+                    help="strict hook-runtime JSON (accepted keys only), "
+                         "always exit 0; blocking uses decision:block")
     ch.set_defaults(func=cmd_check)
     return ap
 

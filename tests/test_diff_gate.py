@@ -1,5 +1,6 @@
 """minimal-diff check tests: silent-vs-warn exits plus fail-open input."""
 
+import json
 import os
 import subprocess
 import sys
@@ -155,3 +156,32 @@ def test_check_env_overrides_honored():
     # max(dirs, exts) scores small.diff 2 (was 3); still trips a max of 1.
     assert "Diff gate" in proc.stdout, (
         "concerns 2 must trip DIFF_GATE_MAX_CONCERNS=1")
+
+
+HOOK_KEYS = {"systemMessage", "decision", "reason",
+             "hookSpecificOutput", "suppressOutput"}
+
+
+def test_hook_output_strict_keys():
+    proc = _run_check(str(FIXTURES / "many-concerns.diff"), "--hook")
+    assert proc.returncode == 0, "hook check exited %d" % proc.returncode
+    try:
+        report = json.loads(proc.stdout)
+    except json.JSONDecodeError as exc:
+        raise AssertionError("hook output is not JSON: %s" % exc)
+    assert set(report) <= HOOK_KEYS, "hook keys %r not hook-safe" % (
+        sorted(set(report)),)
+    assert report.get("systemMessage"), "hook output lacks systemMessage"
+    assert "decision" not in report, "warn-mode hook must not block"
+
+
+def test_hook_block_mode_decision():
+    env = _warn_env()
+    env["DIFF_GATE_MODE"] = "block"
+    proc = _run_check(str(FIXTURES / "many-concerns.diff"), "--hook", env=env)
+    assert proc.returncode == 0, "hook block must exit 0, got %d" % (
+        proc.returncode,)
+    report = json.loads(proc.stdout)
+    assert report.get("decision") == "block", "hook block lacks decision"
+    assert report.get("reason"), "hook block lacks reason"
+    assert report.get("systemMessage"), "hook block lacks systemMessage"

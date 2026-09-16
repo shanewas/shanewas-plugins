@@ -25,7 +25,12 @@
       {
         "id": "done-check",
         "event": "PostToolUse",
-        "command": ["python3", "tools/donecheck.py", "check", "--json"]
+        "command": [
+          "python3",
+          "tools/donecheck.py",
+          "check",
+          "--hook"
+        ]
       }
     ],
     "mcpServers": [],

@@ -5,6 +5,7 @@ Checks one done-claim text plus an optional files/commands log against
 the three required evidence kinds:
 
     tools/donecheck.py check --claim CLAIM [--evidence LOG ...] [--json]
+    tools/donecheck.py check --claim CLAIM [--evidence LOG ...] [--hook]
 
 Every claim must reference build output, test output, and an artifact
 or grep anchor. Matching is case-insensitive: build; test, pass,
@@ -144,10 +145,24 @@ def read_input(path):
         return None, "%s: %s" % (path, exc)
 
 
+def hook_report(text, blocking):
+    """Strict hook-runtime JSON: only keys hook-output schemas accept
+    (systemMessage plus decision/reason when blocking). Always exits 0:
+    blocking travels in the decision field, never the exit code, because
+    hook runtimes drop the message on nonzero exit."""
+    payload = {"systemMessage": text}
+    if blocking:
+        payload = {"decision": "block",
+                   "reason": text.split("\n")[0][:200],
+                   "systemMessage": text}
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+    return 0
+
+
 def fail_open(args, reason, mode, claim_path, evidence_paths):
     """Missing or unreadable inputs: stderr note, exit 0, never a failure."""
     print("verify-done: %s" % reason, file=sys.stderr)
-    if args.json:
+    if args.json and not args.hook:
         print(json.dumps({
             "ok": True,
             "missing": [],
@@ -184,6 +199,10 @@ def cmd_check(args) -> int:
         evidence_texts.append(text)
     cited, waived, missing = evaluate(claim_text, evidence_texts)
     line = verdict_line(cited, waived, missing)
+    if args.hook:
+        if not missing:
+            return 0
+        return hook_report(line, mode == "block")
     if args.json:
         print(json.dumps({
             "ok": not missing,
@@ -218,6 +237,9 @@ def build_parser() -> argparse.ArgumentParser:
                          "else $VERIFY_DONE_EVIDENCE")
     ch.add_argument("--json", action="store_true",
                     help="machine-readable verdict")
+    ch.add_argument("--hook", action="store_true",
+                    help="strict hook-runtime JSON (accepted keys only), "
+                         "always exit 0; blocking uses decision:block")
     ch.set_defaults(func=cmd_check)
     return ap
 

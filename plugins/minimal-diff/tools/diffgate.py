@@ -5,7 +5,7 @@ Reads one unified diff and warns when the change looks too big to
 review in one pass:
 
     tools/diffgate.py check [DIFF] [--max-files N] [--max-lines N]
-                            [--max-concerns N]
+                            [--max-concerns N] [--hook]
 
 With no DIFF, `check` reads the diff from stdin, so it slots behind
 `git diff` in hooks and scripts. It reports files touched, lines
@@ -24,6 +24,7 @@ Works on Python 3.9+ with no third-party packages.
 """
 
 import argparse
+import json
 import os
 import sys
 from pathlib import Path
@@ -158,6 +159,20 @@ def read_input(path):
     return Path(path).read_text(encoding="utf-8", errors="replace")
 
 
+def hook_report(text, blocking):
+    """Strict hook-runtime JSON: only keys hook-output schemas accept
+    (systemMessage plus decision/reason when blocking). Always exits 0:
+    blocking travels in the decision field, never the exit code, because
+    hook runtimes drop the message on nonzero exit."""
+    payload = {"systemMessage": text}
+    if blocking:
+        payload = {"decision": "block",
+                   "reason": text.split("\n")[0][:200],
+                   "systemMessage": text}
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+    return 0
+
+
 def cmd_check(args):
     text = read_input(args.diff)
     if text is None:
@@ -183,6 +198,10 @@ def cmd_check(args):
     if len(files) <= limits[0] and added + removed <= limits[1] \
             and concerns <= limits[2]:
         return 0
+    if args.hook:
+        return hook_report(
+            warn_line(len(files), added, removed, concerns, limits),
+            os.environ.get("DIFF_GATE_MODE") == "block")
     print(warn_line(len(files), added, removed, concerns, limits))
     if os.environ.get("DIFF_GATE_MODE") == "block":
         return BLOCK_EXIT
@@ -209,6 +228,9 @@ def build_parser():
                     help="trip above this concern proxy (default %d, "
                          "DIFF_GATE_MAX_CONCERNS also works)"
                          % DEFAULT_MAX_CONCERNS)
+    ch.add_argument("--hook", action="store_true",
+                    help="strict hook-runtime JSON (accepted keys only), "
+                         "always exit 0; blocking uses decision:block")
     ch.set_defaults(func=cmd_check)
     return ap
 

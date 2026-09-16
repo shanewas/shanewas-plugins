@@ -116,6 +116,8 @@ def test_muse_hooks_envelope():
     assert wrapper.is_file(), "minimal-diff: missing hooks/muse-diff-gate.sh"
     assert "tools/diffgate.py" in wrapper.read_text(encoding="utf-8"), (
         "muse-diff-gate.sh must pipe git diff into tools/diffgate.py")
+    assert "--hook" in wrapper.read_text(encoding="utf-8"), (
+        "muse-diff-gate.sh must pass --hook for strict hook JSON")
 
 
 def test_skill_description_use_when():

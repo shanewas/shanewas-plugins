@@ -2,6 +2,7 @@
 """commit-gate: zero-dependency commit-message and staged-file gate (stdlib only).
 
     tools/commitcheck.py check --message-file MSG [--staged PATHS] [--json]
+    tools/commitcheck.py check --message-file MSG [--staged PATHS] [--hook]
 
 Reads one commit message plus the staged file list and reports every
 violation it finds:
@@ -19,8 +20,10 @@ read the list from a file (`--staged @list.txt`). With no --staged the
 tool runs `git diff --cached --name-only` itself.
 
 Warns (exit 0) by default; with COMMIT_GATE_MODE=block a tripped gate
-exits 2. Missing or unreadable inputs and an unavailable git fail open:
-stderr note, exit 0, never a failure.
+exits 2. `--hook` emits strict hook-runtime JSON (systemMessage, or
+decision:block plus reason) and always exits 0. Missing or unreadable
+inputs and an unavailable git fail open: stderr note, exit 0, never a
+failure.
 
 Works on Python 3.9+ with no third-party packages.
 """
@@ -216,10 +219,24 @@ def verdict_line(violations, message_path, mode):
     return "\n".join(lines)
 
 
+def hook_report(text, blocking):
+    """Strict hook-runtime JSON: only keys hook-output schemas accept
+    (systemMessage plus decision/reason when blocking). Always exits 0:
+    blocking travels in the decision field, never the exit code, because
+    hook runtimes drop the message on nonzero exit."""
+    payload = {"systemMessage": text}
+    if blocking:
+        payload = {"decision": "block",
+                   "reason": text.split("\n")[0][:200],
+                   "systemMessage": text}
+    print(json.dumps(payload, indent=2, ensure_ascii=False))
+    return 0
+
+
 def fail_open(args, reason, mode, message_path, staged):
     """Missing or unreadable inputs: stderr note, exit 0, never a failure."""
     print("commit-gate: %s" % reason, file=sys.stderr)
-    if args.json:
+    if args.json and not args.hook:
         print(json.dumps({
             "ok": True,
             "violations": [],
@@ -262,6 +279,10 @@ def cmd_check(args):
     violations = evaluate(message_text, staged, effective_ban(args),
                           ticket_regex)
     line = verdict_line(violations, message_path, mode_name)
+    if args.hook:
+        if not violations:
+            return 0
+        return hook_report(line, mode == "block")
     if args.json:
         print(json.dumps({
             "ok": not violations,
@@ -298,6 +319,9 @@ def build_parser():
                        help="message must match this regex (off by default)")
     check.add_argument("--json", action="store_true",
                        help="emit the machine-readable report")
+    check.add_argument("--hook", action="store_true",
+                       help="strict hook-runtime JSON (accepted keys only), "
+                            "always exit 0; blocking uses decision:block")
     check.set_defaults(func=cmd_check)
     return parser
 

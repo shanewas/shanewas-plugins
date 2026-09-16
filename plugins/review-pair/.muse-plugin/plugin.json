@@ -25,7 +25,12 @@
       {
         "id": "review-check",
         "event": "PostToolUse",
-        "command": ["python3", "tools/reviewfmt.py", "check", "--json"]
+        "command": [
+          "python3",
+          "tools/reviewfmt.py",
+          "check",
+          "--hook"
+        ]
       }
     ],
     "mcpServers": [],

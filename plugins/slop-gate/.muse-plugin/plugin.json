@@ -25,7 +25,12 @@
       {
         "id": "slop-check",
         "event": "PostToolUse",
-        "command": ["python3", "tools/slop.py", "check", "--json"]
+        "command": [
+          "python3",
+          "tools/slop.py",
+          "check",
+          "--hook"
+        ]
       }
     ],
     "mcpServers": [],
