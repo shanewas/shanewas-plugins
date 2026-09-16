@@ -65,7 +65,14 @@ Each package folder contains:
 ## Repository Layout
 
 - `.claude-plugin/marketplace.json`: Root catalog listing available packages
+- `plugins/audit-trail/`: Zero-dependency edit ledger and review digest: log hook events to JSONL, render per-file digests.
+- `plugins/commit-gate/`: Zero-dependency commit-message and staged-file gate: warn or block on bad shape, AI trailers, and banned extensions.
 - `plugins/core-tools/`: Starter package with `git-summary` skill, `/summary` command, and audit agent
+- `plugins/minimal-diff/`: Zero-dependency diff-size gate: warn or block when a change is too big for one review.
+- `plugins/review-pair/`: Zero-dependency review-findings shape gate: warn or block when review lines are not machine-readable.
+- `plugins/slop-gate/`: Zero-dependency AI-slop scorer and edit gate: warn or block on sloppy prose.
+- `plugins/verify-done/`: Zero-dependency done-claim gate: warn or block when a done claim lacks build, test, or artifact evidence.
+- `tests/`: Zero-dependency fixture tests, run with `python3 tests/run.py`
 - `add-plugin.ps1`: PowerShell generator for new packages
 
 ## License
