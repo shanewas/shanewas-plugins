@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "audit-trail",
+  "displayName": "Audit Trail",
+  "version": "1.0.0",
+  "description": "Zero-dependency edit ledger and review digest: log hook events to JSONL, render per-file digests.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "audit-trail",
+        "path": "skills/audit-trail/SKILL.md"
+      }
+    ],
+    "commands": [
+      {
+        "id": "audit",
+        "path": "commands/audit.md"
+      }
+    ],
+    "hooks": [
+      {
+        "id": "ledger-append",
+        "event": "PostToolUse",
+        "command": ["python3", "tools/ledger.py", "append"]
+      }
+    ],
+    "mcpServers": [],
+    "reminders": []
+  }
+}

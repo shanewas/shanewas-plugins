@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "minimal-diff",
+  "displayName": "Minimal Diff",
+  "version": "1.0.0",
+  "description": "Zero-dependency diff-size gate: warn or block when a change is too big for one review.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "minimal-diff",
+        "path": "skills/minimal-diff/SKILL.md"
+      }
+    ],
+    "commands": [
+      {
+        "id": "diff",
+        "path": "commands/diff.md"
+      }
+    ],
+    "hooks": [
+      {
+        "id": "diff-check",
+        "event": "PostToolUse",
+        "command": ["sh", "hooks/muse-diff-gate.sh"]
+      }
+    ],
+    "mcpServers": [],
+    "reminders": []
+  }
+}

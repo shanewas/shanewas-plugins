@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "verify-done",
+  "displayName": "Verify Done",
+  "version": "1.0.0",
+  "description": "Zero-dependency done-claim gate: warn or block when a done claim lacks build, test, or artifact evidence.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "verify-done",
+        "path": "skills/verify-done/SKILL.md"
+      }
+    ],
+    "commands": [
+      {
+        "id": "done",
+        "path": "commands/done.md"
+      }
+    ],
+    "hooks": [
+      {
+        "id": "done-check",
+        "event": "PostToolUse",
+        "command": ["python3", "tools/donecheck.py", "check", "--json"]
+      }
+    ],
+    "mcpServers": [],
+    "reminders": []
+  }
+}

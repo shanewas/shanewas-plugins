@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "review-pair",
+  "displayName": "Review Pair",
+  "version": "1.0.0",
+  "description": "Zero-dependency review-findings shape gate: warn or block when review lines are not machine-readable.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "review-pair",
+        "path": "skills/review-pair/SKILL.md"
+      }
+    ],
+    "commands": [
+      {
+        "id": "review",
+        "path": "commands/review.md"
+      }
+    ],
+    "hooks": [
+      {
+        "id": "review-check",
+        "event": "PostToolUse",
+        "command": ["python3", "tools/reviewfmt.py", "check", "--json"]
+      }
+    ],
+    "mcpServers": [],
+    "reminders": []
+  }
+}

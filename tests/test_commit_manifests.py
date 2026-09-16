@@ -18,6 +18,7 @@ from frontmatter import ROOT
 PLUGIN = ROOT / "plugins" / "commit-gate"
 MANIFEST_FILES = (
     ".claude-plugin/plugin.json",
+    ".muse-plugin/plugin.json",
     "package.json",
     "gemini-extension.json",
 )
@@ -98,8 +99,16 @@ def test_antigravity_snippet_shape():
         "antigravity snippet must route to tools/commitcheck.py")
 
 
-def test_muse_tbd_note_present():
-    note = PLUGIN / "docs" / "muse-hooks-TBD.md"
-    assert note.is_file(), "commit-gate: missing docs/muse-hooks-TBD.md"
-    body = note.read_text(encoding="utf-8")
-    assert "commitcheck.py" in body, "Muse TBD note must name the CLI fallback"
+def test_muse_hooks_envelope():
+    data = _load_json(".muse-plugin/plugin.json")
+    hooks = (data.get("capabilities") or {}).get("hooks") or []
+    post = [hook for hook in hooks if hook.get("event") == "PostToolUse"]
+    assert post, ".muse-plugin/plugin.json lacks a PostToolUse hook"
+    for hook in post:
+        assert isinstance(hook.get("command"), list), (
+            ".muse-plugin/plugin.json hook command must be argv, got %r"
+            % (hook.get("command"),))
+    commands = [" ".join(hook.get("command", [])) for hook in post]
+    assert any("tools/commitcheck.py" in cmd for cmd in commands), (
+        ".muse-plugin/plugin.json must route to tools/commitcheck.py, got %r"
+        % (commands,))

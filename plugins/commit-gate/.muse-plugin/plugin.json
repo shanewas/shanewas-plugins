@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "commit-gate",
+  "displayName": "Commit Gate",
+  "version": "1.0.0",
+  "description": "Zero-dependency commit-message and staged-file gate: warn or block on bad shape, AI trailers, and banned extensions.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "commit-gate",
+        "path": "skills/commit-gate/SKILL.md"
+      }
+    ],
+    "commands": [
+      {
+        "id": "commit",
+        "path": "commands/commit.md"
+      }
+    ],
+    "hooks": [
+      {
+        "id": "commit-check",
+        "event": "PostToolUse",
+        "command": ["python3", "tools/commitcheck.py", "check", "--json"]
+      }
+    ],
+    "mcpServers": [],
+    "reminders": []
+  }
+}

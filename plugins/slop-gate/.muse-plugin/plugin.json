@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "name": "slop-gate",
+  "displayName": "Slop Gate",
+  "version": "1.0.0",
+  "description": "Zero-dependency AI-slop scorer and edit gate: warn or block on sloppy prose.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "slop-gate",
+        "path": "skills/slop-gate/SKILL.md"
+      }
+    ],
+    "commands": [
+      {
+        "id": "slop",
+        "path": "commands/slop.md"
+      }
+    ],
+    "hooks": [
+      {
+        "id": "slop-check",
+        "event": "PostToolUse",
+        "command": ["python3", "tools/slop.py", "check", "--json"]
+      }
+    ],
+    "mcpServers": [],
+    "reminders": []
+  }
+}
