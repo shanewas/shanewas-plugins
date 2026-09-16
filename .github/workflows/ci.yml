@@ -18,6 +18,7 @@ jobs:
       - name: Syntax gate (py + js)
         run: |
           python3 -m py_compile plugins/*/tools/*.py tests/*.py
+          bash -n add-plugin.sh
           if command -v node >/dev/null 2>&1; then
             for f in plugins/*/plugin.js; do
               node --check "$f"

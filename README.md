@@ -55,6 +55,11 @@ The helper script sets up the cross-agent layout and registers the new entry int
 ./add-plugin.ps1 -Name "my-tool" -Description "Repo linting and release checks"
 ```
 
+Bash alternative (Linux/macOS):
+```bash
+./add-plugin.sh --name "my-tool" --description "Repo linting and release checks"
+```
+
 Each package folder contains:
 - `.claude-plugin/plugin.json` for Claude Code and Muse manifest readers
 - `gemini-extension.json` for Antigravity discovery
@@ -73,7 +78,7 @@ Each package folder contains:
 - `plugins/slop-gate/`: Zero-dependency AI-slop scorer and edit gate: warn or block on sloppy prose.
 - `plugins/verify-done/`: Zero-dependency done-claim gate: warn or block when a done claim lacks build, test, or artifact evidence.
 - `tests/`: Zero-dependency fixture tests, run with `python3 tests/run.py`
-- `add-plugin.ps1`: PowerShell generator for new packages
+- `add-plugin.ps1` / `add-plugin.sh`: PowerShell and bash generators for new packages
 
 ## License
 MIT
