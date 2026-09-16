@@ -1,0 +1,4 @@
+This is not a diff at all, just a plain note someone saved
+with the wrong extension. It holds no hunks, no file headers,
+and nothing a diff parser should ever mistake for a change.
+The gate must pass it open rather than fail on it.

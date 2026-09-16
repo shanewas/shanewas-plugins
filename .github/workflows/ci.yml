@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - name: Lint + fixture tests
+        run: python3 tests/run.py
+
+      - name: Validate plugin bundles (Muse)
+        run: |
+          if command -v muse >/dev/null 2>&1; then
+            for d in plugins/*/; do
+              muse plugins validate "$d"
+            done
+          else
+            echo "muse CLI not installed; skipping validate"
+          fi

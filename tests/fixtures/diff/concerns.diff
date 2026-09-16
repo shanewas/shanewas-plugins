@@ -1,0 +1,24 @@
+diff --git a/alpha/one.py b/alpha/one.py
+index 1111111..2222222 100644
+--- a/alpha/one.py
++++ b/alpha/one.py
+@@ -1,2 +1,3 @@
+ """one."""
++VALUE = 1
+ x = 1
+diff --git a/beta/two.md b/beta/two.md
+index 3333333..4444444 100644
+--- a/beta/two.md
++++ b/beta/two.md
+@@ -1,2 +1,3 @@
+ # Two
++One added line.
+ Old line stays.
+diff --git a/gamma/three.js b/gamma/three.js
+index 5555555..6666666 100644
+--- a/gamma/three.js
++++ b/gamma/three.js
+@@ -1,2 +1,3 @@
+ // three
++const value = 3;
+ const x = 3;

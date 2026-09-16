@@ -1,0 +1,5 @@
+docs: note the new commit gate
+
+Short body, clean subject, but the trailer below names a bot.
+
+Co-authored-by: Claude <claude@example.com>

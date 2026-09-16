@@ -1,0 +1,6 @@
+[RV-1] src/app.cs:42 nit Rename this local for clarity.
+this line has no finding shape at all
+[rv-2] src/app.cs:50 nit Lowercase id tag is not allowed here.
+[RV-3] src/app.cs:9 info Unknown severity word is rejected.
+[RV-4] src/db.cs:12 blocker SQL string built from raw input here.
+[RV-5] src/x.cs:10 nit short

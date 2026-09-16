@@ -1,0 +1,16 @@
+{
+  "description": "Audit trail: log every edited file to a JSONL ledger",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/tools/ledger.py append"
+          }
+        ]
+      }
+    ]
+  }
+}

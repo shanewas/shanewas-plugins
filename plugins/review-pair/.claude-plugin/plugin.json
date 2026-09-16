@@ -1,0 +1,9 @@
+{
+  "name": "review-pair",
+  "description": "Zero-dependency review-findings shape gate: warn or block when review lines are not machine-readable.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com"
+  }
+}

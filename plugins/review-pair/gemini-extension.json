@@ -1,0 +1,6 @@
+{
+  "name": "review-pair",
+  "description": "Zero-dependency review-findings shape gate for Antigravity.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}

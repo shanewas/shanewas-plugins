@@ -1,0 +1,5 @@
+Done: README typo fix shipped.
+
+Build: `npm run build` clean, 0 errors.
+N/A: tests - typo-only change, no code paths touched.
+Artifact: ledger entry 2026-09-16 plus grep anchor `typo-fix`.

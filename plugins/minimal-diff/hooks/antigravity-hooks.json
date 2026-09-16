@@ -1,0 +1,22 @@
+{
+  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your minimal-diff checkout.",
+  "minimal-diff": {
+    "SessionStart": null,
+    "PreInvocation": null,
+    "PostInvocation": null,
+    "Stop": null,
+    "PreToolUse": null,
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git diff HEAD -- | python /path/to/minimal-diff/tools/diffgate.py check",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

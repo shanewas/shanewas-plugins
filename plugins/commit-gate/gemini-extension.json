@@ -1,0 +1,6 @@
+{
+  "name": "commit-gate",
+  "description": "Zero-dependency commit-message and staged-file gate for Antigravity.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}

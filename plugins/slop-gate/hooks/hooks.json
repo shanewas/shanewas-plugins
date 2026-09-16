@@ -1,0 +1,16 @@
+{
+  "description": "Slop gate: warn when an edited file trips the slop threshold",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/tools/slop.py check --json"
+          }
+        ]
+      }
+    ]
+  }
+}

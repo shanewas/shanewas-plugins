@@ -1,0 +1,56 @@
+diff --git a/src/one.py b/src/one.py
+index 1111111..2222222 100644
+--- a/src/one.py
++++ b/src/one.py
+@@ -1,2 +1,3 @@
+ """one."""
++VALUE = 1
+ x = 1
+diff --git a/src/two.py b/src/two.py
+index 1111111..2222222 100644
+--- a/src/two.py
++++ b/src/two.py
+@@ -1,2 +1,3 @@
+ """two."""
++VALUE = 2
+ x = 2
+diff --git a/src/three.py b/src/three.py
+index 1111111..2222222 100644
+--- a/src/three.py
++++ b/src/three.py
+@@ -1,2 +1,3 @@
+ """three."""
++VALUE = 3
+ x = 3
+diff --git a/src/four.py b/src/four.py
+index 1111111..2222222 100644
+--- a/src/four.py
++++ b/src/four.py
+@@ -1,2 +1,3 @@
+ """four."""
++VALUE = 4
+ x = 4
+diff --git a/src/five.py b/src/five.py
+index 1111111..2222222 100644
+--- a/src/five.py
++++ b/src/five.py
+@@ -1,2 +1,3 @@
+ """five."""
++VALUE = 5
+ x = 5
+diff --git a/src/six.py b/src/six.py
+index 1111111..2222222 100644
+--- a/src/six.py
++++ b/src/six.py
+@@ -1,2 +1,3 @@
+ """six."""
++VALUE = 6
+ x = 6
+diff --git a/src/seven.py b/src/seven.py
+index 1111111..2222222 100644
+--- a/src/seven.py
++++ b/src/seven.py
+@@ -1,2 +1,3 @@
+ """seven."""
++VALUE = 7
+ x = 7

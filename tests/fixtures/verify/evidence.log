@@ -1,0 +1,6 @@
+$ npm run build
+build clean, 0 errors in 12s
+$ npm test
+unit suite 142 passed, e2e green
+$ grep -rn contrast-ratio review-notes/
+review-notes/contrast.md:12: contrast-ratio anchor present

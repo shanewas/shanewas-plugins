@@ -1,0 +1,6 @@
+Done: hover-card contrast fix shipped.
+
+Build: `npm run build` clean, 0 errors.
+Tests: unit suite 142 passed, e2e green on staging.
+Artifact: screenshot hover-card-after.png plus grep anchor
+`contrast-ratio` in review notes.

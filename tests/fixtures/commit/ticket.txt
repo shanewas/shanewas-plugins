@@ -1,0 +1,5 @@
+fix(api): handle empty staged list
+
+Returns fail-open instead of crashing on missing git.
+
+Fixes PROJ-123

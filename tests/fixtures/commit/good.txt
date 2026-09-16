@@ -1,0 +1,7 @@
+feat(auth): add commit message gate
+
+Gates each commit on subject shape, body width, and staged
+extensions. Warns by default, blocks when COMMIT_GATE_MODE=block.
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.

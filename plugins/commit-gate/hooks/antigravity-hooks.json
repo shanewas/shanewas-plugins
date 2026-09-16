@@ -1,0 +1,22 @@
+{
+  "_note": "Merge this entry into your project's .agents/hooks.json. Fix the command path to point at your commit-gate checkout.",
+  "commit-gate": {
+    "SessionStart": null,
+    "PreInvocation": null,
+    "PostInvocation": null,
+    "Stop": null,
+    "PreToolUse": null,
+    "PostToolUse": [
+      {
+        "matcher": "write_to_file|replace_file_content",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python /path/to/commit-gate/tools/commitcheck.py check --json",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

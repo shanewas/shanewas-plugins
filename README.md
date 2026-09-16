@@ -70,3 +70,18 @@ Each package folder contains:
 
 ## License
 MIT
+
+## Install Matrix (Unit 0)
+
+Supported-harness overview. Install paths below are repo-observed (from
+`## Installation` above and `.claude-plugin/marketplace.json`); no live
+spike verification evidence was present in the unit-0 handoff, so the
+Verified column stays TBD until a later unit exercises each harness.
+
+| Harness | Install path (repo-observed) | Verified |
+|---|---|---|
+| Claude Code | `claude plugin marketplace add shanewas/shanewas-plugins`, then `claude plugin install core-tools@shanewas-plugins` | TBD |
+| Muse Code | `muse plugins marketplace add shanewas-plugins https://github.com/shanewas/shanewas-plugins`, then `muse plugins install core-tools@shanewas-plugins`; refresh via `muse plugins marketplace update shanewas-plugins` | TBD |
+| OpenCode | Reference `plugins/core-tools/plugin.js` in `plugin` list of `opencode.json` | TBD |
+| Google Antigravity | Copy/mount `plugins/core-tools` into `~/.gemini/extensions/` (discovery via `gemini-extension.json`) | TBD |
+| Hermes | Drop `plugins/<name>/skills/` folders into `~/.hermes/skills/` | TBD |

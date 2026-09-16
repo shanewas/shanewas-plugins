@@ -1,0 +1,9 @@
+{
+  "name": "slop-gate",
+  "description": "Zero-dependency AI-slop scorer and edit gate: warn or block on sloppy prose.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com"
+  }
+}

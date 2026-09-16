@@ -1,0 +1,4 @@
+Done: hover-card contrast fix shipped.
+
+Build: `npm run build` clean, 0 errors.
+Artifact: screenshot hover-card-after.png attached.

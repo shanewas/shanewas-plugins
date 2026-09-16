@@ -1,0 +1,9 @@
+{
+  "name": "minimal-diff",
+  "description": "Zero-dependency diff-size gate: warn or block when a change is too big for one review.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com"
+  }
+}

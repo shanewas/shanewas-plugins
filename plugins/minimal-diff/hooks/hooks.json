@@ -1,0 +1,16 @@
+{
+  "description": "Minimal diff: warn when the working tree outgrows one review",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "git diff HEAD -- | python3 ${CLAUDE_PLUGIN_ROOT}/tools/diffgate.py check"
+          }
+        ]
+      }
+    ]
+  }
+}

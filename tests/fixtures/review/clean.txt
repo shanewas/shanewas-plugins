@@ -1,0 +1,3 @@
+[RV-1] src/app.cs:42 nit Rename this local for clarity.
+[RV-2] src/app.cs:87 nit This comment restates the next line.
+[RV-3] src/db.cs:15 nit Trailing whitespace on this block.

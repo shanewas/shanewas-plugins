@@ -1,0 +1,5 @@
+chore: regenerate the weekly report
+
+Short body, clean subject, bot-signed trailer below.
+
+Generated-by: report-bot v2

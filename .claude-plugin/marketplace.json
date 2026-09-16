@@ -19,6 +19,78 @@
       "source": "./plugins/core-tools",
       "category": "productivity",
       "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "slop-gate",
+      "description": "Zero-dependency AI-slop scorer and edit gate: warn or block on sloppy prose.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/slop-gate",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "audit-trail",
+      "description": "Zero-dependency edit ledger and review digest: log hook events to JSONL, render per-file digests.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/audit-trail",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "minimal-diff",
+      "description": "Zero-dependency diff-size gate: warn or block when a change is too big for one review.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/minimal-diff",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "verify-done",
+      "description": "Zero-dependency done-claim gate: warn or block when a done claim lacks build, test, or artifact evidence.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/verify-done",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "review-pair",
+      "description": "Zero-dependency review-findings shape gate: warn or block when review lines are not machine-readable.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/review-pair",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "commit-gate",
+      "description": "Zero-dependency commit-message and staged-file gate: warn or block on bad shape, AI trailers, and banned extensions.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/commit-gate",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
     }
   ]
 }

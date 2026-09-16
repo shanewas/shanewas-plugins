@@ -1,0 +1,4 @@
+[RV-1] src/db.cs:12 blocker SQL string built from raw input here.
+[RV-2] src/app.cs:87 major Extract this block into a helper method.
+[RV-3] src/app.cs:90 minor Retry loop has no backoff between attempts.
+[RV-4] src/app.cs:95 nit Rename this local for clarity.

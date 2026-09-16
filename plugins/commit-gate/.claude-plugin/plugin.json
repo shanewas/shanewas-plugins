@@ -1,0 +1,9 @@
+{
+  "name": "commit-gate",
+  "description": "Zero-dependency commit-message and staged-file gate: warn or block on bad shape, AI trailers, and banned extensions.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com"
+  }
+}

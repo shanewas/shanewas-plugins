@@ -1,0 +1,18 @@
+diff --git a/plugins/demo/tools/gate.py b/plugins/demo/tools/gate.py
+index 1111111..2222222 100644
+--- a/plugins/demo/tools/gate.py
++++ b/plugins/demo/tools/gate.py
+@@ -1,4 +1,5 @@
+ """demo gate."""
++MAX_FILES = 5
+
+
+ def main():
+diff --git a/plugins/demo/README.md b/plugins/demo/README.md
+index 3333333..4444444 100644
+--- a/plugins/demo/README.md
++++ b/plugins/demo/README.md
+@@ -1,3 +1,4 @@
+ # Demo
++Keeps changes small.
+ Old line stays.

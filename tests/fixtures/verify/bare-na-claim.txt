@@ -1,0 +1,5 @@
+Done: README typo fix shipped.
+
+Build: `npm run build` clean, 0 errors.
+N/A:
+Artifact: screenshot typo-fix.png attached.

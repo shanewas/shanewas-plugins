@@ -1,0 +1,1 @@
+{"claim_refs": ["claim-7"], "edited_lines": {"added": 12, "removed": 4}, "session_id": "sess-1", "tool_input": {"file_path": "src/widget.py"}, "tool_name": "Edit", "turn": 3}

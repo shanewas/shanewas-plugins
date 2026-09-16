@@ -1,0 +1,16 @@
+{
+  "description": "Commit gate: warn when the commit message or staged files break the gate",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/tools/commitcheck.py check --json"
+          }
+        ]
+      }
+    ]
+  }
+}

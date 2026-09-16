@@ -1,0 +1,9 @@
+{
+  "name": "audit-trail",
+  "description": "Zero-dependency edit ledger and review digest: log hook events to JSONL, render per-file digests.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com"
+  }
+}

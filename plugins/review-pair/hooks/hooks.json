@@ -1,0 +1,16 @@
+{
+  "description": "Review pair: warn when review findings carry blocker/major severity or malformed lines",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 ${CLAUDE_PLUGIN_ROOT}/tools/reviewfmt.py check --json"
+          }
+        ]
+      }
+    ]
+  }
+}
