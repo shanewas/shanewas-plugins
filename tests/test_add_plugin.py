@@ -33,7 +33,34 @@ def _make_root():
     return tmp
 
 
+def _to_wsl(win_path: str) -> str:
+    """Translate a Windows absolute path to a WSL path via wslpath."""
+    import subprocess as _sp
+    # Pass via bash -c to avoid backslash stripping by the WSL interop layer.
+    r = _sp.run(["wsl.exe", "bash", "-c", f"wslpath '{win_path}'"],
+                capture_output=True, text=True)
+    return r.stdout.strip()
+
+
 def _run(*args):
+    if sys.platform == "win32":
+        # native bash absent on Windows; delegate to WSL
+        wsl_script = _to_wsl(str(SCRIPT))
+        # translate any --root value in args (always a Windows tempdir)
+        translated = []
+        skip_next = False
+        for i, a in enumerate(args):
+            if skip_next:
+                translated.append(_to_wsl(a))
+                skip_next = False
+            elif a == "--root":
+                translated.append(a)
+                skip_next = True
+            else:
+                translated.append(a)
+        return subprocess.run(
+            ["wsl.exe", "bash", wsl_script] + translated,
+            capture_output=True, text=True, timeout=120)
     return subprocess.run(
         ["bash", str(SCRIPT)] + list(args),
         capture_output=True, text=True, timeout=120)
