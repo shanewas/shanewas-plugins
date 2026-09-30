@@ -72,6 +72,7 @@ The `tools/*.py` CLIs are stdlib-only; the node shims (`plugin.js`) require node
 ## Repository Layout
 
 - `.claude-plugin/marketplace.json`: Root catalog listing available packages
+- `plugins/anti-slop/`: Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules.
 - `plugins/audit-trail/`: Zero-dependency edit ledger and review digest: log hook events to JSONL, render per-file digests.
 - `plugins/commit-gate/`: Zero-dependency commit-message and staged-file gate: warn or block on bad shape, AI trailers, and banned extensions.
 - `plugins/core-tools/`: Starter package with `git-summary` skill, `/summary` command, and audit agent

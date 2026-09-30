@@ -1,0 +1,11 @@
+{
+  "author": "Shanewas Ahmed <shanewasahmed@gmail.com>",
+  "description": "Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules.",
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.17.8"
+  },
+  "version": "1.1.0",
+  "name": "@shanewas/plugin-anti-slop",
+  "license": "MIT",
+  "main": "plugin.js"
+}

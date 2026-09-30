@@ -1,0 +1,9 @@
+{
+  "name": "anti-slop",
+  "author": {
+    "email": "shanewasahmed@gmail.com",
+    "name": "Shanewas Ahmed"
+  },
+  "description": "Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules.",
+  "version": "1.1.0"
+}

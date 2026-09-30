@@ -1,7 +1,7 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "shanewas-plugins",
-  "description": "Universal multi-agent plugin & skill marketplace by Shanewas Ahmed — supporting Claude Code, Antigravity, OpenCode, Hermes, and Muse.",
+  "description": "Universal multi-agent plugin & skill marketplace by Shanewas Ahmed \u2014 supporting Claude Code, Antigravity, OpenCode, Hermes, and Muse.",
   "owner": {
     "name": "Shanewas Ahmed",
     "email": "shanewasahmed@gmail.com",
@@ -89,6 +89,18 @@
         "email": "shanewasahmed@gmail.com"
       },
       "source": "./plugins/commit-gate",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "anti-slop",
+      "description": "Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/anti-slop",
       "category": "productivity",
       "homepage": "https://github.com/shanewas/shanewas-plugins"
     }
