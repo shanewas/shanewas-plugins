@@ -103,6 +103,18 @@
       "source": "./plugins/anti-slop",
       "category": "productivity",
       "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "office-doc-gotchas",
+      "description": "Field notes for Excel and PDF work: Japanese review checklists, look-alike judgement marks, PDF re-export that matches an original, and vendor stamp annotations.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/office-doc-gotchas",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
     }
   ]
 }

@@ -1,0 +1,11 @@
+{
+  "description": "Field notes for Excel and PDF work: Japanese review checklists, look-alike judgement marks, PDF re-export that matches an original, and vendor stamp annotations.",
+  "author": "Shanewas Ahmed <shanewasahmed@gmail.com>",
+  "name": "@shanewas/plugin-office-doc-gotchas",
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.17.8"
+  },
+  "version": "1.1.0",
+  "main": "plugin.js",
+  "license": "MIT"
+}

@@ -6,6 +6,13 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added
+
+- `office-doc-gotchas` plugin: notes for Excel review checklists
+  (furigana in shared strings, look-alike ○ marks that break COUNTIF
+  scores, re-exporting a sheet to a matching A4 PDF) and for PDFs that
+  carry vendor stamp annotations.
+
 ## [1.1.0] - 2026-09-16
 
 ### Added
