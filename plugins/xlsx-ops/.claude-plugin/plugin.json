@@ -1,0 +1,9 @@
+{
+  "name": "xlsx-ops",
+  "author": {
+    "name": "Shanewas Ahmed",
+    "email": "shanewasahmed@gmail.com"
+  },
+  "version": "1.1.0",
+  "description": "Spreadsheet edits through one JSON CLI on openpyxl: read, find, set cells and ranges, rows, columns, sheets, merges, formats, images, plus formula recalculation in real Excel over COM."
+}

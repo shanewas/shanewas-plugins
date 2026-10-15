@@ -12,6 +12,10 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
   (furigana in shared strings, look-alike ○ marks that break COUNTIF
   scores, re-exporting a sheet to a matching A4 PDF) and for PDFs that
   carry vendor stamp annotations.
+- `xlsx-ops` plugin: a JSON CLI for workbook edits that keeps formulas
+  and re-reads each saved file to verify the change, with formula
+  recalculation in Microsoft Excel over COM and a smoke test covering
+  every command.
 
 ## [1.1.0] - 2026-09-16
 
