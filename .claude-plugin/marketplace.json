@@ -115,6 +115,18 @@
       "source": "./plugins/office-doc-gotchas",
       "category": "productivity",
       "homepage": "https://github.com/shanewas/shanewas-plugins"
+    },
+    {
+      "name": "xlsx-ops",
+      "description": "Spreadsheet edits through one JSON CLI on openpyxl: read, find, set cells and ranges, rows, columns, sheets, merges, formats, images, plus formula recalculation in real Excel over COM.",
+      "version": "1.1.0",
+      "author": {
+        "name": "Shanewas Ahmed",
+        "email": "shanewasahmed@gmail.com"
+      },
+      "source": "./plugins/xlsx-ops",
+      "category": "productivity",
+      "homepage": "https://github.com/shanewas/shanewas-plugins"
     }
   ]
 }
