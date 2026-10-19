@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "name": "grounded-planning",
+  "displayName": "Grounded Planning",
+  "version": "1.1.0",
+  "description": "Anchors implementation plans, technical specs, and architecture in as-built code and real runtime constraints.",
+  "compat": {
+    "source": "native",
+    "manifestDir": ".muse-plugin"
+  },
+  "capabilities": {
+    "skills": [
+      {
+        "id": "grounded-planning",
+        "path": "skills/grounded-planning/SKILL.md"
+      }
+    ],
+    "commands": [],
+    "hooks": [],
+    "mcpServers": [],
+    "reminders": []
+  }
+}

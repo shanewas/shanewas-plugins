@@ -76,6 +76,7 @@ The `tools/*.py` CLIs are stdlib-only; the node shims (`plugin.js`) require node
 - `plugins/audit-trail/`: Zero-dependency edit ledger and review digest: log hook events to JSONL, render per-file digests.
 - `plugins/commit-gate/`: Zero-dependency commit-message and staged-file gate: warn or block on bad shape, AI trailers, and banned extensions.
 - `plugins/core-tools/`: Starter package with `git-summary` skill, `/summary` command, and audit agent
+- `plugins/grounded-planning/`: Anchors implementation plans, technical specs, and architecture in as-built code and real runtime constraints.
 - `plugins/minimal-diff/`: Zero-dependency diff-size gate: warn or block when a change is too big for one review.
 - `plugins/review-pair/`: Zero-dependency review-findings shape gate: warn or block when review lines are not machine-readable.
 - `plugins/slop-gate/`: Zero-dependency AI-slop scorer and edit gate: warn or block on sloppy prose.

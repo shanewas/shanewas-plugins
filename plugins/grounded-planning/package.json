@@ -1,0 +1,11 @@
+{
+  "name": "@shanewas/plugin-grounded-planning",
+  "version": "1.1.0",
+  "description": "Anchors implementation plans, technical specs, and architecture in as-built code and real runtime constraints.",
+  "author": "Shanewas Ahmed <shanewasahmed@gmail.com>",
+  "license": "MIT",
+  "main": "plugin.js",
+  "dependencies": {
+    "@opencode-ai/plugin": "^1.17.8"
+  }
+}
