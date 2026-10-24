@@ -8,6 +8,11 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- `anti-slop` 1.3.0: round 3 of `sentence-patterns.md` — Doyle (carry-over
+  openers, confidence tags per item, averted-outcome credit, dash
+  correction to a measured limit) and Shakespeare (concrete null reports,
+  symptom-question stacks), plus a note that Shakespeare's antithesis
+  confirms the existing "Not X, but Y" ban.
 - `anti-slop` 1.2.0: new `references/sentence-patterns.md` in the skill —
   positive sentence patterns from Dickens and Austen (fact-first openings,
   colon frames, claim;evidence semicolons, long-then-short rhythm) with

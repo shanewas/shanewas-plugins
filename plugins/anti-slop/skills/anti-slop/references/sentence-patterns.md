@@ -149,3 +149,78 @@ We retry Z, because W."
 12. Give parallel items one shared frame, with each item's reason inside
     its own sentence.
 13. For trade-offs, verdict first, then the condition it depends on.
+
+## Round 3: Doyle and Shakespeare
+
+Added after close reading of Doyle (*A Study in Scarlet*, opening) and
+Shakespeare (*Hamlet*, opening scenes). The Doyle excerpt ends before
+Holmes reasons, so the explanation patterns are Watson's; the
+Shakespeare patterns come from dialogue.
+
+### 13. Carry-over opener (Doyle)
+Each sentence opens with a short phrase that repeats where the last one
+ended, then adds one new fact.
+- "Having completed my studies there, I was duly attached to the Fifth Northumberland Fusiliers as Assistant Surgeon."
+Use for: incident timelines and onboarding docs. Order stays clear
+without a timestamp on every line.
+
+### 14. Progress, then interruption (Doyle)
+"had already [reached some level] ... when [setback]." The recovery level
+comes first, so the reader can judge the second failure's impact.
+Use for: incident reports with a second failure.
+
+### 15. Averted outcome, then credit (Doyle)
+Name the bad outcome first, then "had it not been for" and the person or
+mechanism that prevented it.
+- "I should have fallen into the hands of the murderous Ghazis had it not been for the devotion"
+Use for: postmortems. Naming the prevented outcome shows the save's worth.
+
+### 16. Confidence tag on each item (Doyle)
+In a list of facts about one subject, each item carries its own source
+marker: "I believe", "as far as I know", or nothing when certain.
+- "I believe he is well up in anatomy, and he is a first-class chemist"
+Use for: status lists. "Confirmed: the cert expired. Likely: renewal
+failed on the cron host. Unknown: why the alert stayed silent."
+
+### 17. Dash correction to a measured limit (Doyle)
+A broad claim, a dash, then the same claim narrowed to a hard number.
+The writer corrects their own claim on the page.
+- "as free as air—or as free as an income of eleven shillings and sixpence a day will permit"
+Use for: status updates that would otherwise overclaim. "Migration is
+done—or done for the 94% of tenants already on v3." One em dash per piece
+at most (see the punctuation rules).
+
+### 18. Concrete null report (Shakespeare)
+A status question gets a negative answer phrased as the smallest thing
+that would have shown up.
+- "Have you had quiet guard?" / "Not a mouse stirring."
+Use for: on-call handoffs. "No pages, no retries, queue depth flat."
+
+### 19. Symptom-question stack, answer mapped back (Shakespeare)
+Parallel "why" questions, one per observation, then one closing question
+asking for the shared cause. The reply names the cause once and points it
+at each symptom, in the asker's terms.
+Use for: escalation mails and RCA summaries.
+
+### 20. The skeptic's prior, then what changed it (Shakespeare)
+State the belief held before, then the evidence that replaced it.
+- "I might not this believe / Without the sensible and true avouch / Of mine own eyes."
+Use for: motivation sections. "I assumed this was a flaky test until I
+reproduced it on a clean VM."
+
+### Antithesis: the ban stands
+Shakespeare's antithesis pairs two things that are both true ("make the
+night joint-labourer with the day"). "Not X, but Y" invents a wrong view
+so it can correct it, and that invented opponent is the tell. Reading
+Shakespeare confirms the banned-words rule; it does not relax it.
+
+### Added transfer rules
+
+14. Open each timeline sentence with a short phrase that repeats where
+    the last one ended.
+15. Tag confidence or source on each item in a status list, never once
+    for the whole list.
+16. When crediting a save, name the outcome it prevented first.
+17. Report a null as the smallest thing that would have shown up.
+18. When answering several questions, end by pointing the cause at each
+    question in the asker's terms.
