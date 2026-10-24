@@ -224,3 +224,90 @@ Shakespeare confirms the banned-words rule; it does not relax it.
 17. Report a null as the smallest thing that would have shown up.
 18. When answering several questions, end by pointing the cause at each
     question in the asker's terms.
+
+## Round 4: Strunk, The Elements of Style (1918)
+
+Not fiction: a style manual, read against the existing rules. Most of
+Strunk is already covered (fact-first, active voice, concrete language,
+claim;evidence, parallel form). What follows is only what he adds, plus
+the conflicts and how they resolve.
+
+### 21. One topic per paragraph, end on the consequence
+A paragraph opens on its claim and closes on the consequence, never on a
+digression or an unimportant detail.
+Use for: docs, mail, PR descriptions. "So the cache must be per-tenant."
+
+### 22. Give the action back to the verb
+When a noun names the whole action and the verb only completes the
+sentence, turn the noun into the verb. "A review of the logs was
+conducted" becomes "We reviewed the logs." Watch for "there is" forms,
+which are technically active and still dead.
+
+### 23. Say what is
+"Not" is for denial or antithesis, never evasion. Replace the negated
+phrase with its positive word or a number: "did not remember" becomes
+"forgot"; "coverage is not great" becomes "two of the five handlers have
+tests".
+
+### 24. Put the new element last
+The end of a sentence is the emphatic position; it should hold the new
+information. Context goes first. "We rolled back because of the memory
+leak" becomes "Because of the memory leak, we rolled back" when the
+rollback is the news. Fact-first orders sentences; this orders words
+inside one.
+
+### 25. Keep related words together
+Subject next to its verb; a relative pronoun right after its word;
+"only" and "not all" next to the word they limit. "All the tests did not
+pass" becomes "Not all the tests passed."
+
+### 26. Vary clause structure, not only length
+A run of two-clause sentences joined by and/but/so/which/while drones,
+even when the lengths vary. Recast some as simple sentences, semicolon
+pairs, or periodic sentences, whichever matches the real relation.
+
+### 27. Same thing, same word
+Ideas of equal rank take the same form and the same name. Rotating
+synonyms for variety makes readers hunt for a difference that is not
+there, and reads as machine writing. Past about seven parallel items,
+use a table.
+
+### 28. Summaries: one tense, one attribution
+Keep one tense through a summary. Attribute once at the top, then stop
+writing "he added". In a review, lead with the conclusion and use the
+source's details as evidence.
+
+### 29. "Fact" is for the verifiable
+Call something a fact only when it can be directly verified, not when it
+is a judgment. Judgments take a confidence tag (pattern 16): "I think
+Postgres fits better." Facts: "the cert expired at 03:00 UTC."
+
+### Conflicts, resolved
+- Short sentences vs combining: merge three or more short sentences that
+  are steps in one causal chain (the full stops hide the "because").
+  Keep the short sentence when it follows a long one and states the
+  verdict or result. Test: if two sentences join with "so" or "because"
+  and nothing is lost, merge them.
+- One-sentence paragraphs: at most two per post (the hook, one turn).
+  Every line as its own paragraph is itself a tell. In docs and mail,
+  one topic per paragraph with at least two sentences.
+- "Not X, but Y": allowed only when X is a claim the reader has actually
+  heard and the source is named. Otherwise the ban stands.
+- Qualifier-last vs end-weight: a one- or two-word qualifier may end the
+  sentence ("It's done, mostly"). A whole qualifier clause moves to the
+  front, so the sentence ends on the claim.
+- "So" turns: at most one per paragraph, as its own sentence after a
+  setup. Never two "X, so Y" compounds in a row.
+- Strunk's dated rules lose to modern usage: singular "they" is fine;
+  shall/will by person, the split-infinitive ban and "to-day" are period
+  style, not rules.
+
+### Added transfer rules
+
+19. Put the new or decisive information at the end of the sentence, the
+    context at the front.
+20. When a noun names the action, turn it into the verb.
+21. When "not" softens a judgment, replace it with the positive word or
+    a number.
+22. Call one thing by one name throughout; never rotate synonyms.
+23. One topic per paragraph: open on the claim, close on the consequence.

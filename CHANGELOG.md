@@ -8,6 +8,12 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- `anti-slop` 1.4.0: round 4 of `sentence-patterns.md` from Strunk's
+  *Elements of Style* (1918) — end-weight for new information, action back
+  to the verb, positive form over negated hedging, related words together,
+  one name per thing, paragraph rules — plus conflict resolutions against
+  the fiction rounds, and Strunk's wordy constructions added to
+  `banned-words.md`.
 - `anti-slop` 1.3.0: round 3 of `sentence-patterns.md` — Doyle (carry-over
   openers, confidence tags per item, averted-outcome credit, dash
   correction to a measured limit) and Shakespeare (concrete null reports,

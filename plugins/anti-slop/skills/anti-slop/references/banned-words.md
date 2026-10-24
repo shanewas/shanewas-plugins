@@ -117,3 +117,15 @@ Flagged specifically in TFS / Redmine / SkyPAS_AT developer communications:
 ### Code Comments
 - **No spec/ticket references:** No `仕様書`, `SDF_`, ticket `#` in comments (keep in git commit message).
 - **No code narration:** No `// loop through items` above `foreach`. Only explain non-obvious *why*.
+---
+
+## 6. Strunk Additions (The Elements of Style, 1918)
+
+Wordy constructions Strunk names, banned on the same terms as section 2:
+- "the fact that" (cut, or restructure: "the fact that he had arrived" → "his arrival")
+- "the question as to whether" (write "whether")
+- "he is a man who" / "she is a person who" (state the trait directly)
+- "in a hasty manner" and other "in a ___ manner" forms (use the adverb: "hastily")
+- "who is" / "which was" filler inside relative clauses that can drop ("the vendor, who is based in Osaka" → "the Osaka vendor")
+
+Intensifier filler (Strunk ch. V, same treatment as buzzwords): very, certainly (mid-sentence), interesting / interestingly as praise, literally (non-literal use), factor, feature (as a noun for a trait), "along these lines".

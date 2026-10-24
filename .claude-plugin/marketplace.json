@@ -94,8 +94,8 @@
     },
     {
       "name": "anti-slop",
-      "description": "Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules, plus classic sentence-pattern guidance from Dickens, Austen, Twain, Tagore, Doyle and Shakespeare.",
-      "version": "1.3.0",
+      "description": "Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules, plus classic sentence-pattern guidance from Dickens, Austen, Twain, Tagore, Doyle, Shakespeare and Strunk.",
+      "version": "1.4.0",
       "author": {
         "name": "Shanewas Ahmed",
         "email": "shanewasahmed@gmail.com"
