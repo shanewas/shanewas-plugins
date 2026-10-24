@@ -8,6 +8,12 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- `anti-slop` 1.2.0: new `references/sentence-patterns.md` in the skill —
+  positive sentence patterns from Dickens and Austen (fact-first openings,
+  colon frames, claim;evidence semicolons, long-then-short rhythm) with
+  transfer rules and a worked example, wired into the skill's pre-writing
+  checks.
+
 - `office-doc-gotchas` plugin: notes for Excel review checklists
   (furigana in shared strings, look-alike ○ marks that break COUNTIF
   scores, re-exporting a sheet to a matching A4 PDF) and for PDFs that

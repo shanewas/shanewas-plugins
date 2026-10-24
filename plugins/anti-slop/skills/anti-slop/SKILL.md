@@ -37,6 +37,7 @@ Apply these constraints to every email, doc, PR description, README, commit mess
 ### Pre-Writing Checks
 1. Load banned vocabulary and phrases from [references/banned-words.md](references/banned-words.md). Never use items from this list.
 2. Check for a learned voice profile at `~/.claude/voice-profile.json` (created via `python scripts/detect_slop.py --learn`). Match measured mean sentence length, burstiness, contraction rate, and passive rate rather than generic defaults.
+3. For sentence construction, apply [references/sentence-patterns.md](references/sentence-patterns.md): main fact first, colon frames, long-then-short rhythm, semicolons for claim-and-evidence and action chains.
 
 ### Structural Rules
 - **No Rule of Three:** LLMs default to triples. Break the pattern: use two, four, one, or five.
@@ -136,6 +137,7 @@ Automated cleanup handles mechanical issues (banned phrases, filler, wordy trans
 
 Consult the reference guides in `references/`:
 - [references/banned-words.md](references/banned-words.md): Banned vocabulary, phrases, openers, and model-specific tells.
+- [references/sentence-patterns.md](references/sentence-patterns.md): Positive sentence patterns from Dickens and Austen (fact-first openings, colon frames, claim;evidence, long-then-short rhythm) with transfer rules for short professional writing.
 - [references/text-patterns.md](references/text-patterns.md): Full catalogue of overused transitions, filler, and corporate jargon.
 - [references/code-patterns.md](references/code-patterns.md): Programming antipatterns (generic names like `data`/`result`/`temp`, comments restating code, speculative abstraction, single-implementation interfaces).
 - [references/design-patterns.md](references/design-patterns.md): Visual/UI antipatterns (purple-cyan gradients, card spam, uniform weight, generic hero copy).

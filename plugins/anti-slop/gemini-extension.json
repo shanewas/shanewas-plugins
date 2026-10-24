@@ -1,6 +1,6 @@
 {
   "name": "anti-slop",
   "contextFileName": "GEMINI.md",
-  "description": "Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules.",
-  "version": "1.1.0"
+  "description": "Zero-dependency AI-slop detector, voice calibrator, and prose de-slopper with deep English and Japanese grammatical rules, plus classic sentence-pattern guidance from Dickens and Austen.",
+  "version": "1.2.0"
 }
