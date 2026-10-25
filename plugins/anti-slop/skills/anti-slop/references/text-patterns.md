@@ -193,6 +193,12 @@ One in a document is how people talk. Recurring, it's a register.
 - "which only bites when you scan" → "which only matters when you scan"
 - "quietly becoming 'and also not a sibling thread'" → state the caveat plainly
 - Two-word punch fragments after a setup sentence: "Both shipped."
+- Aphorism pairs where the second "sentence" drops its verb: "Generation got cheap. Maintenance didn't." → "Generating code is cheap now. Maintaining it still costs the same."
+- Verbless emphasis runs: "No logs. No metrics." → fold into a sentence that has a verb, or cut
+
+The detector flags both shapes ("Dangling auxiliary", "Verbless fragment"). Only short
+sentences are judged; clause ellipsis inside a full sentence ("...the queue was dropping
+jobs, and it wasn't") is ordinary English and is not flagged.
 
 ### The standup test
 
@@ -216,6 +222,8 @@ has one was written by a model told to sound human.
 2. Sentences with 3+ hedge words ("might possibly perhaps")
 3. Sentences with both "navigate" and "landscape/complexity"
 4. Opening sentences that describe what the text will do instead of doing it
+5. Short sentences ending on a bare auxiliary ("Maintenance didn't.")
+6. Short sentences with no verb at all, used as emphasis ("No logs. No metrics.")
 
 ### Paragraph-Level Red Flags
 1. Opening paragraphs that are pure meta-commentary

@@ -22,7 +22,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
@@ -711,6 +711,7 @@ class SlopDetector:
         self._reset()
         self._scan_phrases()
         self._analyze_structure()
+        self._analyze_fragments()
 
         if self.is_prose:
             if cjk_share(self.text) > CJK_RHYTHM_CUTOFF:
@@ -816,6 +817,99 @@ class SlopDetector:
                     "issue": "Emoji headings",
                     "description": f"{emoji} headings carry emoji",
                 })
+
+    # Auxiliaries that cannot close a complete sentence on their own: a short
+    # sentence ending on one has had its main verb cut ("Maintenance didn't.").
+    _DANGLING_AUX = {
+        "didn't", "doesn't", "don't", "won't", "can't", "couldn't", "wouldn't",
+        "shouldn't", "isn't", "aren't", "wasn't", "weren't", "hasn't", "haven't",
+        "hadn't", "mustn't", "ain't",
+    }
+    _AUX_WORDS = {
+        "am", "is", "are", "was", "were", "be", "been", "being",
+        "have", "has", "had", "do", "does", "did",
+        "can", "could", "will", "would", "shall", "should", "may", "might", "must",
+    }
+    # Frequent finite verbs, so a short sentence carrying one is not called
+    # verbless. -ed and -ing forms also count as a verb signal.
+    _FINITE_VERBS = _AUX_WORDS | {
+        "got", "get", "gets", "go", "goes", "went", "come", "came", "comes",
+        "take", "took", "takes", "make", "made", "makes", "see", "saw", "know",
+        "knew", "think", "thought", "say", "said", "tell", "told", "give",
+        "gave", "gives", "find", "found", "work", "works", "run", "runs",
+        "ran", "cost", "costs", "matter", "matters", "mean", "means", "need",
+        "needs", "want", "wants", "try", "tries", "use", "uses", "keep",
+        "keeps", "look", "looks", "seem", "seems", "show", "shows", "start",
+        "starts", "stop", "stops", "help", "helps", "call", "calls", "put",
+        "set", "let", "lets", "leave", "leaves", "change", "changes", "move",
+        "moves", "grow", "grows", "fail", "fails", "win", "wins", "pay",
+        "pays", "paid", "read", "write", "writes", "build", "builds", "built",
+        "break", "breaks", "broke", "hold", "holds", "stand", "stands",
+        "fall", "falls", "sit", "sits", "lie", "lies", "live", "lives",
+        "die", "dies", "end", "ends", "open", "opens", "close", "closes",
+        "turn", "turns", "point", "points", "play", "plays", "stay", "stays",
+        "wait", "waits", "ask", "asks", "add", "adds", "cut", "cuts", "hit",
+        "hits", "began", "begin", "begins", "became", "become", "lead",
+        "leads", "bring", "brings", "brought", "feel", "feels", "reach",
+        "reaches", "happen", "happens", "depend", "depends", "remain",
+        "remains", "exist", "exists", "include", "includes", "require",
+        "requires", "contain", "contains",
+    }
+
+    def _analyze_fragments(self):
+        """Punch fragments: short sentences with no main verb, kept for
+        emphasis. 'Generation got cheap. Maintenance didn't.' The second one
+        is not a sentence. The check stays narrow on purpose: only short
+        sentences are judged, so clause ellipsis inside a full sentence
+        ('...convinced the queue was dropping jobs, and it wasn't') is left
+        alone, and precision beats recall."""
+        if not self.is_prose or cjk_share(self.text) > CJK_RHYTHM_CUTOFF:
+            return
+        body = mask_code(self.text)
+        dangling, verbless = [], []
+        for para in re.split(r"\n\s*\n", body):
+            lines = [ln.strip() for ln in para.split("\n")
+                     if ln.strip() and not ln.strip().startswith("#")]
+            if not lines:
+                continue
+            if all(ln.startswith(("-", "*", "|", ">")) or re.match(r"^\d+[.)]", ln)
+                   for ln in lines):
+                continue  # lists and tables are allowed their fragments
+            for sent in split_sentences(" ".join(lines)):
+                s = sent.strip().strip("\"“”‘’'()[]")
+                if not s or s.startswith(("#", "-", "*", "|")):
+                    continue
+                toks = tokenize(s)
+                if len(toks) < 2:
+                    continue
+                last = toks[-1]
+                if len(toks) <= 6 and (
+                    last in self._DANGLING_AUX
+                    or last in self._AUX_WORDS
+                    or (last == "not" and toks[-2] in self._AUX_WORDS)
+                ):
+                    dangling.append(s)
+                elif len(toks) <= 7 and not any(
+                    t in self._FINITE_VERBS
+                    or t.endswith(("ed", "ing"))
+                    # A contracted auxiliary is a verb too: "That's a misread"
+                    # has one, "No logs" does not.
+                    or ("'" in t and t.rsplit("'", 1)[-1] in ("s", "re", "ve", "ll", "d", "m"))
+                    for t in toks
+                ):
+                    verbless.append(s)
+        if dangling:
+            self.findings["structure"].append({
+                "issue": "Dangling auxiliary",
+                "description": f"{len(dangling)} short sentence(s) end on a bare auxiliary, main verb cut: "
+                               + "; ".join(f"'{s}'" for s in dangling[:3]),
+            })
+        if verbless:
+            self.findings["structure"].append({
+                "issue": "Verbless fragment",
+                "description": f"{len(verbless)} short sentence(s) with no verb, used as punch emphasis: "
+                               + "; ".join(f"'{s}'" for s in verbless[:3]),
+            })
 
     def _hot_lines(self, top: int = 5) -> List[Dict]:
         """Lines carrying the most weighted phrase hits — the best place to start editing."""
@@ -1023,6 +1117,16 @@ def selftest():
     # Structure: bold-label bullet template
     tpl = "\n".join(f"- **Point {i}:** something" for i in range(5))
     assert any(f["issue"] == "Bold-label bullets" for f in run(tpl)["findings"]["structure"])
+
+    # Fragments: a short sentence ending on a bare auxiliary, or with no verb
+    # at all, is punch emphasis, not a sentence.
+    frag = run("Generation got cheap. Maintenance didn't. The build takes an hour.")
+    assert any(f["issue"] == "Dangling auxiliary" for f in frag["findings"]["structure"]), frag["findings"]
+    frag2 = run("No logs. No metrics. Just a dashboard and a prayer for the on-call.")
+    assert any(f["issue"] == "Verbless fragment" for f in frag2["findings"]["structure"]), frag2["findings"]
+    # Clause ellipsis inside a full sentence is ordinary English, not a fragment
+    assert not any(f["issue"] in ("Dangling auxiliary", "Verbless fragment")
+                   for f in varied_r["findings"]["structure"]), varied_r["findings"]
 
     print(f"selftest ok - flat={flat_r['score']} varied={varied_r['score']}, all regression checks pass")
 

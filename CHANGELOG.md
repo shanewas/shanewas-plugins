@@ -8,6 +8,12 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- `anti-slop` 1.5.0: the detector now flags punch fragments as structural
+  findings — short sentences that end on a bare auxiliary ("Maintenance
+  didn't.") or carry no verb at all. SKILL.md gains the complete-sentences
+  rule and a Contextual Sloppiness section (register match, composed
+  cadence, the reply-box test), with the fragment shapes catalogued in
+  `text-patterns.md`.
 - `anti-slop` 1.4.0: round 4 of `sentence-patterns.md` from Strunk's
   *Elements of Style* (1918) — end-weight for new information, action back
   to the verb, positive form over negated hedging, related words together,

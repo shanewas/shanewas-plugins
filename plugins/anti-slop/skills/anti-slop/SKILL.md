@@ -43,6 +43,7 @@ Apply these constraints to every email, doc, PR description, README, commit mess
 - **No Rule of Three:** LLMs default to triples. Break the pattern: use two, four, one, or five.
 - **No uniform sentence length:** Never write three consecutive sentences of similar word count. Vary 4-word punchy sentences with 25+ word compound sentences.
 - **No parataxis:** Do not chain short blunt declarative sentences in a row ("Short sentence. Then another. Then another."). Connect related thoughts using conjunctions, subordinate clauses, commas, or semicolons.
+- **Complete sentences only:** A sentence carries a subject and a main verb. Punch fragments are slop even when they scan well: "Generation got cheap. Maintenance didn't." pairs a compressed sentence with one that is not a sentence at all. Verbless emphasis lines are the same move ("No logs. No metrics."). If the thought matters, give it a verb; if it doesn't, cut it. The detector flags both shapes ("Dangling auxiliary", "Verbless fragment").
 - **No hedging seesaw:** Pick a side and state it plainly. Acknowledge counterpoints in one sentence max without equal weighting.
 - **No corporate pep talk:** Write like an experienced practitioner including frustrations and trade-offs. No cheerleading.
 - **No uniform paragraph structure:** Do not repeat topic sentence → explanation → example → transition. Vary paragraph starters and lengths. Let some end abruptly without a summary.
@@ -84,6 +85,8 @@ Apply these constraints to every email, doc, PR description, README, commit mess
 8. Unnecessary summary at end of paragraphs? → Drop.
 9. Fake data/quotes/statistics? → Replace or qualify.
 10. Restated user's question or ended with boilerplate CTA? → Strip.
+11. Any sentence without a main verb, or ending on a bare auxiliary? → Complete it or cut it.
+12. Register check: does this read as typed in the venue it lands in (reply box, email, doc), or as an essay pasted into it? → Rewrite at the venue's register (see Contextual Sloppiness).
 
 ---
 
@@ -150,6 +153,14 @@ Text written under anti-slop rules often drifts into hyper-stylized writerly idi
 - Smug compression ("which only bites when you scan").
 
 **The Standup Test:** Would an experienced engineer say this aloud in standup without feeling self-conscious or performative? If not, use plain factual verbs.
+
+### Contextual Sloppiness
+Slop is judged against where the text lands, not only against the text. A passage can be phrase-clean, well within every metric, and still read as machine-written in context:
+- **Register mismatch:** A forum reply composed like an essay — claim, colon, evidence, conclusion, every sentence landing cleanly in sequence — reads as generated in a reply box, however clean its phrases are. Match the venue's grain: comments are ragged, mail is plain, docs are structured.
+- **Composed cadence:** Uniformly finished sentences are the tell. Real writing in casual venues has uneven weight: a half-thought, an aside, a point made once and left alone.
+- **Do not fake the fix:** Manufactured roughness (stock idioms, deliberate typos, slang the author never uses) is second-order slop with extra steps. Write less composed instead: fewer balanced constructions, no aphorism openers, let one sentence carry two thoughts.
+
+**The Reply-Box Test:** Would this look typed into this exact box by the person whose name is on it? If it reads like an article excerpt pasted into a comment, rewrite it at the venue's register before posting.
 
 ---
 
