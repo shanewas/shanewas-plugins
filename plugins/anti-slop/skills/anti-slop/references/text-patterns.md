@@ -224,12 +224,17 @@ has one was written by a model told to sound human.
 4. Opening sentences that describe what the text will do instead of doing it
 5. Short sentences ending on a bare auxiliary ("Maintenance didn't.")
 6. Short sentences with no verb at all, used as emphasis ("No logs. No metrics.")
+7. Definition frames: the sentence defines its subject instead of stating an event ("The daemon is the part that stays up.")
+8. Vague handling verbs: an abstraction processes the fact ("The daemon side already treats it that way.")
+9. Balanced mirror pairs: two clauses of near-equal weight facing each other across a semicolon
 
 ### Paragraph-Level Red Flags
 1. Opening paragraphs that are pure meta-commentary
 2. Paragraphs that restate the title in different words
 3. Closing paragraphs that say "in conclusion" then summarize without adding insight
 4. Every paragraph starting with a transition word
+5. A short finished sentence parked at the end of a longer paragraph as a beat ("The daemon keeps running.")
+6. Voice flipping: impersonal system-talk in one paragraph, a sudden "I" in the next
 
 ### Document-Level Red Flags
 1. High density of buzzwords (>5% of unique words)

@@ -87,6 +87,8 @@ Apply these constraints to every email, doc, PR description, README, commit mess
 10. Restated user's question or ended with boilerplate CTA? → Strip.
 11. Any sentence without a main verb, or ending on a bare auxiliary? → Complete it or cut it.
 12. Register check: does this read as typed in the venue it lands in (reply box, email, doc), or as an essay pasted into it? → Rewrite at the venue's register (see Contextual Sloppiness).
+13. Sentence-structure check: any sentence that defines its subject ("X is the part that..."), mirrors its pair clause for clause, or lets an abstraction perform a tidy reporting verb ("status shows", "treats it that way")? → Restate it as an event with a concrete subject (see Sentence-Structure Slop).
+14. Beat and voice check: does any paragraph end on a short placed beat, and does the person stay the same from the first sentence to the last? → Fold beats into the flow; hold one voice throughout.
 
 ---
 
@@ -161,6 +163,23 @@ Slop is judged against where the text lands, not only against the text. A passag
 - **Do not fake the fix:** Manufactured roughness (stock idioms, deliberate typos, slang the author never uses) is second-order slop with extra steps. Write less composed instead: fewer balanced constructions, no aphorism openers, let one sentence carry two thoughts.
 
 **The Reply-Box Test:** Would this look typed into this exact box by the person whose name is on it? If it reads like an article excerpt pasted into a comment, rewrite it at the venue's register before posting.
+
+### Sentence-Structure Slop ("Grammatical Slop")
+
+A sentence can be complete, correct and still slop. Grammar is not the tell; construction is. Composed prose builds balanced, periodic sentences that arrive fully packaged. Typed prose is loose: the main clause lands first and the facts trail after it, joined by commas, "and" and "because", at uneven lengths. Three shapes give composed construction away:
+
+- **Definition frames:** "The daemon is the part that stays up." The sentence defines its subject instead of reporting an event. State the event instead: "The daemon keeps running."
+- **Balanced mirror pairs:** "The daemon stays up; the extension connects to it." Two clauses of near-equal weight facing each other across a semicolon or comma. Real replies do not come in matched pairs; break the symmetry and let the sentences differ in length and weight.
+- **Abstract subjects with tidy reporting verbs:** "Status shows it as not connected." "The daemon side already treats it that way." A system, a "side", a state performs a summarizing verb on an abstraction, and no concrete fact survives. Name the actor a person would name and the words they would actually see: "You run agent-bridge status and it tells you the extension is disconnected."
+
+The fix is structural, not lexical: concrete subjects (I, you, the call, the daemon), verbs that name physical events (fails, drops, keeps running) over verbs that summarize (treats, handles, shows), and loose sentences over periodic ones. The detector flags definition frames and vague handling verbs mechanically; mirror pairs and abstract subjects are judgment calls, caught by self-check item 13.
+
+Two more composed habits ride along with these (both called out by San, 2026-10-26, across five drafts of one Reddit reply):
+
+- **Paragraph-end beats:** a short, finished sentence parked at the end of a longer paragraph to land a point — "The daemon keeps running." People typing do not place beats; the weight sits wherever the thought ended. If a paragraph ends on a sentence much shorter than the ones before it, fold the fact into the flow or move it mid-paragraph. The detector flags this shape when the final sentence is a fraction of the paragraph's average.
+- **Voice flipping:** impersonal system-talk for two paragraphs, then a sudden "I" in the third. Assembled text switches person because it was written in sections. A reply has one speaker: pick the person (usually "I" for an author answering about their own work) and hold it from the first sentence.
+
+Uniform finish is the background condition for both: when every sentence is medium-length and lands cleanly, the paragraph reads edited rather than typed, whatever its phrases score. Let lengths scatter — one long loose sentence can carry a paragraph that also holds a four-word one, as long as the short one is not parked at the end as a beat.
 
 ---
 

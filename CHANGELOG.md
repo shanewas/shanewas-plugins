@@ -8,6 +8,15 @@ and the catalog uses [Semantic Versioning](https://semver.org/).
 
 ### Added
 
+- `anti-slop` 1.6.0: sentence-structure slop. The detector (2.3.0) now
+  flags definition frames ("X is the part that..."), vague handling verbs
+  ("treats it that way") and paragraph-end beats — complete, grammatical
+  sentences whose construction reads composed rather than typed. SKILL.md
+  gains a Sentence-Structure Slop section (loose sentences over periodic
+  ones, concrete subjects, event verbs, one voice throughout) with
+  self-check items 13–14, and the shapes are catalogued in
+  `text-patterns.md`. As with 1.3.0–1.5.0, only the anti-slop manifests
+  move; the root `VERSION` stays at the catalog's 1.1.0.
 - `anti-slop` 1.5.0: the detector now flags punch fragments as structural
   findings — short sentences that end on a bare auxiliary ("Maintenance
   didn't.") or carry no verb at all. SKILL.md gains the complete-sentences

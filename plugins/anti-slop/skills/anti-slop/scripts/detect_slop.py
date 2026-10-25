@@ -22,7 +22,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-__version__ = "2.1.0"
+__version__ = "2.3.0"
 
 for _stream in (sys.stdout, sys.stderr):
     if hasattr(_stream, "reconfigure"):
@@ -712,6 +712,7 @@ class SlopDetector:
         self._scan_phrases()
         self._analyze_structure()
         self._analyze_fragments()
+        self._analyze_composed_sentences()
 
         if self.is_prose:
             if cjk_share(self.text) > CJK_RHYTHM_CUTOFF:
@@ -909,6 +910,72 @@ class SlopDetector:
                 "issue": "Verbless fragment",
                 "description": f"{len(verbless)} short sentence(s) with no verb, used as punch emphasis: "
                                + "; ".join(f"'{s}'" for s in verbless[:3]),
+            })
+
+    # "X is the part that ..." — a definition frame: the sentence defines its
+    # subject instead of stating what happened. Composed-prose habit, flagged
+    # by San 2026-10-26 on "The daemon is the part that stays up."
+    _DEFINITION_FRAME = re.compile(
+        r"\bis the (part|thing|side|one|kind|sort|place|way) (that|where|when)\b",
+        re.IGNORECASE)
+    # An abstract handling verb standing in for a fact: "treats it that way".
+    _VAGUE_HANDLING = re.compile(
+        r"\b(treats?|handles?|deals with) it (that|this) way\b", re.IGNORECASE)
+
+    def _analyze_composed_sentences(self):
+        """Composed-sentence slop: grammatically complete sentences built in
+        shapes nobody types into a reply box. Three shapes are mechanical
+        enough to flag — definition frames, vague handling verbs, and
+        paragraph-end beats. The wider family (balanced mirror pairs,
+        abstract subjects with tidy reporting verbs, voice flipping) stays a
+        prose rule in SKILL.md. Narrow on purpose, same bargain as
+        _analyze_fragments: precision over recall."""
+        if not self.is_prose or cjk_share(self.text) > CJK_RHYTHM_CUTOFF:
+            return
+        body = mask_code(self.text)
+        frames, vague, beats = [], [], []
+        for para in re.split(r"\n\s*\n", body):
+            lines = [ln.strip() for ln in para.split("\n")
+                     if ln.strip() and not ln.strip().startswith("#")]
+            if not lines:
+                continue
+            if all(ln.startswith(("-", "*", "|", ">")) or re.match(r"^\d+[.)]", ln)
+                   for ln in lines):
+                continue  # lists and tables are exempt, as in the fragment check
+            sents = []
+            for sent in split_sentences(" ".join(lines)):
+                s = sent.strip().strip("\"“”‘’'()[]")
+                if not s or s.startswith(("#", "-", "*", "|")):
+                    continue
+                sents.append(s)
+                if self._DEFINITION_FRAME.search(s):
+                    frames.append(s)
+                if self._VAGUE_HANDLING.search(s):
+                    vague.append(s)
+            # Paragraph-end beat: a short finished sentence parked after
+            # longer ones to land a point ("The daemon keeps running.").
+            # Typed text ends where the thought ends; placed beats are editing.
+            if len(sents) >= 3:
+                counts = [len(tokenize(s)) for s in sents]
+                if counts[-1] <= 5 and sum(counts[:-1]) / len(counts[:-1]) >= 12:
+                    beats.append(sents[-1])
+        if beats:
+            self.findings["structure"].append({
+                "issue": "Paragraph-end beat",
+                "description": f"{len(beats)} paragraph(s) end on a short placed beat after longer sentences: "
+                               + "; ".join(f"'{s}'" for s in beats[:3]),
+            })
+        if frames:
+            self.findings["structure"].append({
+                "issue": "Definition frame",
+                "description": f"{len(frames)} sentence(s) define the subject instead of stating the fact: "
+                               + "; ".join(f"'{s}'" for s in frames[:3]),
+            })
+        if vague:
+            self.findings["structure"].append({
+                "issue": "Vague handling verb",
+                "description": f"{len(vague)} sentence(s) let an abstraction handle the fact instead of stating it: "
+                               + "; ".join(f"'{s}'" for s in vague[:3]),
             })
 
     def _hot_lines(self, top: int = 5) -> List[Dict]:

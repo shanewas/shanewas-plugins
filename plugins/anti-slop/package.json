@@ -4,7 +4,7 @@
   "dependencies": {
     "@opencode-ai/plugin": "^1.17.8"
   },
-  "version": "1.5.0",
+  "version": "1.6.0",
   "name": "@shanewas/plugin-anti-slop",
   "license": "MIT",
   "main": "plugin.js"
